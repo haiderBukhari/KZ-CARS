@@ -126,14 +126,14 @@ const Body = () => {
                                                                 expertise and unwavering dedication to perfection, Detroit
                                                                 KZ Cars provide a flawless, seamless travel
                                                                 experience, exceptionally comfortable and entirely
-                                                                stress-free. DTW KZ Cars diverse fleet of
+                                                                stress-free. KZ Cars diverse fleet of
                                                                 meticulously maintained vehicles, including sedans, SUVs,
                                                                 and limousines, is equipped with modern amenities to ensure
                                                                 comfort. Our professional chauffeurs prioritize your safety
                                                                 and satisfaction and are highly skilled, punctual, and
                                                                 knowledgeable. Whether you need airport transfers,
                                                                 transportation for corporate events, or special occasions
-                                                                like weddings, Detroit Airport Town Car unwavering
+                                                                like weddings, Manchester Airport Town Car unwavering
                                                                 commitment lies in delivering exceptional service
                                                                 custom-tailored to meet your requirements. Discover the
                                                                 convenience, reliability, and elegance that KZ Cars Service.
@@ -179,7 +179,7 @@ const Body = () => {
                                     <div className="elementor-element elementor-element-71a7d119 elementor-widget elementor-widget-heading"
                                         data-id="71a7d119" data-element_type="widget" data-widget_type="heading.default">
                                         <div className="elementor-widget-container">
-                                            <h2 className="elementor-heading-title elementor-size-default">Detroit Private
+                                            <h2 className="elementor-heading-title elementor-size-default">Manchester Private
                                                 Transportation Services</h2>
                                         </div>
                                     </div>
@@ -196,7 +196,7 @@ const Body = () => {
                                         data-id="508d554a" data-element_type="widget"
                                         data-widget_type="text-editor.default">
                                         <div className="elementor-widget-container">
-                                            <p>.DTW KZ Cars is your trusted partner for all your transportation
+                                            <p> KZ Cars is your trusted partner for all your transportation
                                                 needs. We pride ourselves on providing reliable private transportation
                                                 services that ensure a seamless travel experience. Whether heading to the
                                                 airport, attending a business meeting, or exploring a new city, Our
@@ -427,8 +427,8 @@ const Body = () => {
                                         data-id="498749c2" data-element_type="widget"
                                         data-widget_type="text-editor.default">
                                         <div className="elementor-widget-container">
-                                            <p>Call us today and take advantage of our great deals and special promotions in
-                                                the Detroit region and surrounding communities.</p>
+                                            <p>Call us today or book your ride through Reservation Page.
+                                                </p>
                                             <p><em><strong>Call us now <span style={{ color: '#000000' }}><a
                                                 style={{ color: '#000000' }}
                                                 href="tel:+447446158821">+447446158821</a> </span>
