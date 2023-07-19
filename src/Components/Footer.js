@@ -223,7 +223,7 @@ const Footer = () => {
                                 data-id="43af18b9" data-element_type="widget"
                                 data-widget_type="text-editor.default">
                                 <div class="elementor-widget-container">
-                                    <p>© Copyright 2023 KX Cars. All Rights Reserved. | Design by <span
+                                    <p>© Copyright 2023 Kz Cars. All Rights Reserved. | Design by <span
                                             style={{color: '#ffffff'}}><a style={{color: '#ffffff'}}
                                                 href="https://twitter.com/ThenameizBilal">Hamraz Ahmed</a></span></p>
                                 </div>
