@@ -38,7 +38,7 @@ export const About = () => {
                                             <div class="elementor-widget-container">
                                                 <div class="elementor-divider">
                                                     <span class="elementor-divider-separator">
-                                                    hssisi
+                                                      Waqas Ahmed
                                                     </span>
                                                 </div>
                                             </div>
