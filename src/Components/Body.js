@@ -112,7 +112,7 @@ const Body = () => {
                                                         data-widget_type="heading.default">
                                                         <div className="elementor-widget-container">
                                                             <h1 className="elementor-heading-title elementor-size-default">
-                                                                Manchester KZ Cars
+                                                                KZ Cars Manchester UK
                                                             </h1>
                                                         </div>
                                                     </div>
@@ -127,8 +127,8 @@ const Body = () => {
                                                                 KZ Cars provide a flawless, seamless travel
                                                                 experience, exceptionally comfortable and entirely
                                                                 stress-free. KZ Cars diverse fleet of
-                                                                meticulously maintained vehicles, including sedans, SUVs,
-                                                                and limousines, is equipped with modern amenities to ensure
+                                                                meticulously maintained vehicles, including Audi and
+                                                                Mercedes , equipped with modern amenities to ensure
                                                                 comfort. Our professional chauffeurs prioritize your safety
                                                                 and satisfaction and are highly skilled, punctual, and
                                                                 knowledgeable. Whether you need airport transfers,
