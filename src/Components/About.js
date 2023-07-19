@@ -28,7 +28,7 @@ export const About = () => {
                                         </div>
                                         <div class="elementor-element elementor-element-54f3e44d elementor-widget elementor-widget-heading" data-id="54f3e44d" data-element_type="widget" data-widget_type="heading.default">
                                             <div class="elementor-widget-container">
-                                                <span class="elementor-heading-title elementor-size-default">WE ALWAYS MAKE OUR CUSTOMERS</span>		</div>
+                                                <span class="elementor-heading-title elementor-size-default">WE ALWAYS MAKE OUR CUSTOMERS HAPPY</span>		</div>
                                         </div>
                                         <div class="elementor-element elementor-element-665c8497 elementor-widget elementor-widget-text-editor" data-id="665c8497" data-element_type="widget" data-widget_type="text-editor.default">
                                             <div class="elementor-widget-container">
@@ -38,7 +38,7 @@ export const About = () => {
                                             <div class="elementor-widget-container">
                                                 <div class="elementor-divider">
                                                     <span class="elementor-divider-separator">
-                                                      Waqas Ahmed
+                                                      WAQAS AHMED (Head of company)
                                                     </span>
                                                 </div>
                                             </div>
