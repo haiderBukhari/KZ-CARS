@@ -64,7 +64,7 @@ export const ContactData = () => {
             <div className="info">
               <div className="information">
                 <img src="img/location.png" className="icon" alt="" />
-                <p>19 SULLIVAN STREET, LONGSIGHT, MANCHESTER, M12 4WS, GREATER MANCHESTER UNITED KINGDOM</p>
+                <p>19 SULLIVAN STREET, LONGSIGHT, MANCHESTER, M12 4WS, GREATER MANCHESTER UNITED state</p>
               </div>
               <div className="information">
                 <img src="img/email.png" className="icon" alt="" />
