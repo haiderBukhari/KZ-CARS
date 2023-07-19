@@ -136,8 +136,8 @@ const Body = () => {
                                                                 like weddings, Detroit Airport Town Car unwavering
                                                                 commitment lies in delivering exceptional service
                                                                 custom-tailored to meet your requirements. Discover the
-                                                                convenience, reliability, and elegance that define Airport
-                                                                Metro Limo today.
+                                                                convenience, reliability, and elegance that KZ Cars Service.
+                                                            
                                                                 Choose KZ Cars for a journey that exceeds your
                                                                 expectations. Our 24/7 availability ensures that you receive
                                                                 reliable and punctual service anytime. With our attention to
@@ -145,7 +145,7 @@ const Body = () => {
                                                                 aim to make your transportation experience exceptional.
                                                                 Get in touch with our welcoming customer service team today
                                                                 to reserve your airport transfer or inquire about our wide
-                                                                range of transportation services. Trust Airport Metro Town
+                                                                range of transportation services. Trust KZ CARS
                                                                 Car for a luxurious and memorable journey from start to
                                                                 finish.</p>
                                                         </div>
@@ -196,13 +196,13 @@ const Body = () => {
                                         data-id="508d554a" data-element_type="widget"
                                         data-widget_type="text-editor.default">
                                         <div className="elementor-widget-container">
-                                            <p>DTW Airport Black Car is your trusted partner for all your transportation
+                                            <p>.DTW KZ Cars is your trusted partner for all your transportation
                                                 needs. We pride ourselves on providing reliable private transportation
                                                 services that ensure a seamless travel experience. Whether heading to the
                                                 airport, attending a business meeting, or exploring a new city, Our
                                                 unwavering dedication lies in providing service that goes above and beyond,
                                                 surpassing your expectations with excellence. Our commitment to reliability
-                                                is evident in every aspect of our service. At Detroit Black Car Service, we
+                                                is evident in every aspect of our service. At KZ Cars Service, we
                                                 place the utmost importance on punctuality and efficiency throughout your
                                                 entire journey, from when you make your reservation until you reach your
                                                 desired destination. You can have complete peace of mind knowing that our
@@ -289,7 +289,7 @@ const Body = () => {
                                                         <div className="elementor-widget-container">
                                                             <span
                                                                 className="elementor-heading-title elementor-size-default">Explore
-                                                                our First className Limousine & Black Car Services
+                                                                our First className Audi and Mercedees Car Services
                                                             </span>
                                                         </div>
                                                     </div>
