@@ -96,77 +96,31 @@ const Header = () => {
                                         <div class="elementor-menu-toggle" role="button" tabindex="0"
                                             aria-label="Menu Toggle" aria-expanded="false">
                                             <i aria-hidden="true" role="presentation"
-                                                class="elementor-menu-toggle__icon--open eicon-menu-bar"></i><i
+                                                class="elementor-menu-toggle__icon--open fa-solid fa-bars"></i><i
                                                     aria-hidden="true" role="presentation"
-                                                    class="elementor-menu-toggle__icon--close eicon-close"></i> <span
+                                                    class="elementor-menu-toggle__icon--close fa-solid fa-xmark"></i> <span
                                                         class="elementor-screen-only">Menu</span>
                                         </div>
                                         <nav class="elementor-nav-menu--dropdown elementor-nav-menu__container"
                                             aria-hidden="true">
-                                            <ul id="menu-2-70e89ab9" class="elementor-nav-menu">
+                                            <ul id="menu-2-70e89ab9" class="elementor-nav-menu abcde">
                                                 <li
                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6 current_page_item menu-item-60">
-                                                    <Link to="https://airportmetrolimo.com/" aria-current="page"
-                                                        class="elementor-item elementor-item-active" tabindex="-1">Home</Link>
+                                                    <a href="/" aria-current="page"
+                                                        class={`elementor-item ${clocation.pathname==='/' ? 'elementor-item-active' : ''}`} tabindex="-1">Home</a>
                                                 </li>
                                                 <li
                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-170">
-                                                    <Link to="https://airportmetrolimo.com/about/" class="elementor-item"
-                                                        tabindex="-1">About</Link></li>
-                                                <li
-                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-145">
-                                                    <Link to="https://airportmetrolimo.com/our-services/"
-                                                        class="elementor-item" tabindex="-1">Our Services</Link>
-                                                    <ul class="sub-menu elementor-nav-menu--dropdown">
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-204">
-                                                            <Link to="https://airportmetrolimo.com/airport-transportation/"
-                                                                class="elementor-sub-item" tabindex="-1">Airport
-                                                                Transportation</Link></li>
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-236">
-                                                            <Link to="https://airportmetrolimo.com/corporate-transportation/"
-                                                                class="elementor-sub-item" tabindex="-1">Corporate
-                                                                Transportation</Link></li>
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-255">
-                                                            <Link to="https://airportmetrolimo.com/night-services/"
-                                                                class="elementor-sub-item" tabindex="-1">Night Services</Link>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254">
-                                                            <Link to="https://airportmetrolimo.com/wedding-services/"
-                                                                class="elementor-sub-item" tabindex="-1">Wedding
-                                                                Services</Link></li>
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-273">
-                                                            <Link to="https://airportmetrolimo.com/prom-services/"
-                                                                class="elementor-sub-item" tabindex="-1">Prom Services</Link>
-                                                        </li>
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-293">
-                                                            <Link to="https://airportmetrolimo.com/roadshow/"
-                                                                class="elementor-sub-item" tabindex="-1">Roadshow</Link></li>
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-321">
-                                                            <Link to="https://airportmetrolimo.com/bachelor-parties/"
-                                                                class="elementor-sub-item" tabindex="-1">Bachelor
-                                                                Parties</Link></li>
-                                                        <li
-                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-341">
-                                                            <Link to="https://airportmetrolimo.com/casino-tours/"
-                                                                class="elementor-sub-item" tabindex="-1">Casino Tours</Link>
-                                                        </li>
-                                                    </ul>
-                                                </li>
+                                                    <a href="/about" class={`elementor-item ${clocation.pathname==='/about' ? 'elementor-item-active' : ''}`}
+                                                        tabindex="-1">About</a></li>
                                                 <li
                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137">
-                                                    <Link to="https://airportmetrolimo.com/reservation/"
-                                                        class="elementor-item" tabindex="-1">Reservation</Link></li>
+                                                    <a href="/reservation"
+                                                        class={`elementor-item ${clocation.pathname==='/reservation' ? ` elementor-item-active` : ''}`} tabindex="-1">Reservation</a></li>
                                                 <li
                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-169">
-                                                    <Link to="https://airportmetrolimo.com/contact-us/"
-                                                        class="elementor-item" tabindex="-1">Contact Us</Link></li>
+                                                    <a href="contact"
+                                                        class={`elementor-item ${clocation.pathname==='/contact' ? ` elementor-item-active` : ''}`} tabindex="-1">Contact Us</a></li>
                                             </ul>
                                         </nav>
                                     </div>
