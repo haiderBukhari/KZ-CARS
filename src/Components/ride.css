@@ -1,0 +1,275 @@
+.ride-sec{
+    margin: auto;
+    padding: 0 20px;
+    max-width: 1100px;
+}
+.info-ride{
+    display: flex;
+    align-items: center;
+    background-color: #ccc;
+    margin: auto;
+    margin-top: 30px;
+    padding: 11px 30px;
+    font-size: 18px;
+}
+.info-ride .radio{
+    margin-right: 10px;
+}
+.label-tag{
+    font-weight: 500;
+    font-size: 16px;
+}
+.apply-margin{
+    margin: 25px 0;
+}
+.margin{
+    margin: 15px 0;
+}
+.ride-part{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+.ride-part .left{
+    width: 44%;
+}
+form{
+    padding: 0 !important;
+    margin: 0 ;
+}
+.sub{
+    display: flex;
+    flex-direction: row;
+}
+.left-div, .right-div{
+    display: flex;
+    flex-direction: column;
+}
+.left-div{
+    width: 100%;
+    margin-right: 20px;
+}
+.date{
+    width: 90%;
+    border-radius: 0 !important;
+}
+.time{
+    height: 44px;
+    padding: 0 20px;
+}
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+.maped{
+    height: 100%;
+}
+.right{
+    padding-left: 20px;
+    width: 56%;
+}
+.ifreame-width{
+    width: 100%;
+}
+.person-svg{
+    width: auto;
+    height: 30px;
+}
+.m-table{
+    display: flex;
+}
+td{
+    display: flex;
+    flex-direction: row;
+}
+.m-table{
+    border: 0;
+    border-width: 0;
+}
+.m-table p, .m-table img{
+    border: 1px solid #333;
+    padding: 10px;
+    padding: 10px 15px;
+}
+.m-table img{
+    height: 46px;
+    width: auto;
+}
+.apply-flex{
+    margin-top: 15px;
+    margin-bottom: -10px;
+    display: flex;
+}
+.apply-flex p:first-child{
+    padding-left: 14px;
+}
+.apply-flex p:nth-child(2){
+    padding-left: 60px;
+}
+.main-p{
+    display: flex;
+    flex-direction: row;
+}
+.main-p div:first-child{
+    margin-right: 20px;
+    margin-left: 7px;
+}
+.apply-p{
+    cursor: pointer;
+}
+.apply-p:hover{
+    box-shadow: 2px 3px 10px #ccc;
+}
+.s-vehecle{
+    width: 200px;
+    background-color: black;
+    color: white;
+}
+.time{
+    width: 100%;
+}
+.bottom-s{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+.ap-pa{
+    padding-left:10px;
+}
+.bottom-s div:first-child{
+    margin-right: 30px;
+}
+.vehicle-main{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+}
+.vehicle-main div:first-child{
+    margin-right:20px;
+}
+.vehicles{
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 5px 10px 10px #ccc, -2px -5px 10px #ccc;
+}
+.star{
+    display: flex;
+    color: rgb(236, 236, 55);
+    margin: 10px 0;
+}
+.star i{
+    padding: 3px;
+    font-size: 17px;
+}
+.aaa{
+    text-decoration: underline;
+}
+.m-auto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.name{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 20px 0;
+}
+.f-name, .l-name{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.name input{
+    width: 99%;
+}
+.name div:first-child{
+    margin-right:3%;
+}
+.m-t{
+    margin-top: 20px
+}
+.marg{
+    margin: 10px 0;
+}
+@media only screen and (max-width:809px){
+    .right{
+        display: none;
+    }
+    .ride-part .left{
+        width: 100%;
+    }
+}
+@media only screen and (max-width:442px){
+    .main-p{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+    }   
+    .left-luggage{
+        margin: auto;
+    }
+}
+.b-o{
+    margin-bottom: 30px;
+}
+.m-b{
+    margin-bottom: 20px;
+}
+@media only screen and (max-width:432px){
+    .confirmation, .name{
+        display: flex;
+        flex-direction: column;
+    }
+    .contact{
+        margin-top: -15px;
+    }
+}
+@media only screen and (max-width:397px){
+    .sub{
+        flex-direction: column;
+    }
+    .main-p div:first-child, .ips {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center !important;
+    }
+    .m-t{
+        margin-top: 10px;
+    }
+    .m2k{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .bottom-s{
+        flex-direction: column;
+        margin: 0
+    }
+    .bottom-s div:first-child{
+        margin-right: 0px;
+    }
+    .selective{
+        margin: 0;
+        padding: 0;
+    }
+    .selective{
+        margin-top: 10px;
+    }
+    .vehicle-main{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

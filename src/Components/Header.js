@@ -1,0 +1,204 @@
+import { Link } from 'react-router-dom'
+import './alpha.css'
+import Logo from './Logo.png'
+import { useLocation } from 'react-router-dom'
+import { useState } from 'react'
+const Header = () => {
+    let clocation = useLocation();
+    let [data, setdata] = useState({
+        home: true,
+        about: false,
+        reservation: false,
+        contact: false
+    })
+    let changehover = (e) => {
+        console.log(e);
+    }
+    return (
+        <header id="masthead" itemscope="itemscope" itemtype="https://schema.org/WPHeader">
+            <p class="main-title bhf-hidden" itemprop="headline"><Link to="https://airportmetrolimo.com"
+                title="KZ Cars" rel="home">KZ Cars</Link></p>
+            <div data-elementor-type="wp-post" data-elementor-id="54" class="elementor elementor-54">
+                <header
+                    class="elementor-section elementor-top-section elementor-element elementor-element-26779241 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+                    data-id="26779241" data-element_type="section"
+                    data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+                    <div class="elementor-container elementor-column-gap-default">
+                        <div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-535290dd"
+                            data-id="535290dd" data-element_type="column">
+                            <div class="elementor-widget-wrap elementor-element-populated">
+                                <div class="elementor-element elementor-element-5ae04ee8 elementor-widget elementor-widget-image"
+                                    data-id="5ae04ee8" data-element_type="widget" data-widget_type="image.default">
+                                    <div class="elementor-widget-container">
+                                        <Link to="/">
+                                            <img className='img-logo' src={Logo} alt="" /> </Link>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-7cfbeb30"
+                            data-id="7cfbeb30" data-element_type="column">
+                            <div class="elementor-widget-wrap elementor-element-populated">
+                                <div class="elementor-element elementor-element-70e89ab9 elementor-nav-menu__align-left elementor-nav-menu--stretch elementor-nav-menu--dropdown-tablet elementor-nav-menu__text-align-aside elementor-nav-menu--toggle elementor-nav-menu--burger elementor-widget elementor-widget-nav-menu"
+                                    data-id="70e89ab9" data-element_type="widget"
+                                    data-settings="{&quot;full_width&quot;:&quot;stretch&quot;,&quot;layout&quot;:&quot;horizontal&quot;,&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;&lt;i class=\&quot;fas fa-caret-down\&quot;&gt;&lt;\/i&gt;&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;toggle&quot;:&quot;burger&quot;}"
+                                    data-widget_type="nav-menu.default">
+                                    <div class="elementor-widget-container">
+                                        <link rel="stylesheet"
+                                            href="https://airportmetrolimo.com/wp-content/plugins/elementor-pro/assets/css/widget-nav-menu.min.css" />
+                                        <nav
+                                            class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-double-line e--animation-slide">
+                                            <ul id="menu-1-70e89ab9" class="elementor-nav-menu">
+                                                <li
+                                                    onClick={() => {
+                                                        setdata({
+                                                            ...data,
+                                                            home: true,
+                                                            about: false,
+                                                            reservation: false,
+                                                            contact: false
+                                                        })
+                                                    }} class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6 current_page_item menu-item-60">
+                                                    <Link onClick={changehover} to="/" aria-current="page"
+                                                        class={`elementor-item ${clocation.pathname==='/' ? 'elementor-item-active' : ''}`}>Home</Link></li>
+                                                <li
+                                                    onClick={() => {
+                                                        setdata({
+                                                            ...data,
+                                                            home: false,
+                                                            about: true,
+                                                            reservation: false,
+                                                            contact: false
+                                                        })
+                                                    }} class="menu-item menu-item-type-post_type menu-item-object-page menu-item-170">
+                                                    <Link to="/about" class={`elementor-item ${clocation.pathname==='/about' ? 'elementor-item-active' : ''}`}>About</Link></li>
+                                                <li
+                                                    onClick={() => {
+                                                        setdata({
+                                                            home: false,
+                                                            about: false,
+                                                            reservation: true,
+                                                            contact: false
+                                                        })
+                                                    }} class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137">
+                                                    <Link to="/reservation" class={`elementor-item ${clocation.pathname==='/reservation' ? ` elementor-item-active` : ''}`}>Reservation</Link></li>
+                                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-169">
+                                                    <Link to="/contact" onClick={() => {
+                                                        setdata({
+                                                            home: false,
+                                                            about: false,
+                                                            reservation: false,
+                                                            contact: true
+                                                        })
+                                                    }} class={`elementor-item ${clocation.pathname==='/contact' ? ` elementor-item-active` : ''}`}>Contact Us</Link></li>
+                                            </ul>
+                                        </nav>
+                                        <div class="elementor-menu-toggle" role="button" tabindex="0"
+                                            aria-label="Menu Toggle" aria-expanded="false">
+                                            <i aria-hidden="true" role="presentation"
+                                                class="elementor-menu-toggle__icon--open eicon-menu-bar"></i><i
+                                                    aria-hidden="true" role="presentation"
+                                                    class="elementor-menu-toggle__icon--close eicon-close"></i> <span
+                                                        class="elementor-screen-only">Menu</span>
+                                        </div>
+                                        <nav class="elementor-nav-menu--dropdown elementor-nav-menu__container"
+                                            aria-hidden="true">
+                                            <ul id="menu-2-70e89ab9" class="elementor-nav-menu">
+                                                <li
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6 current_page_item menu-item-60">
+                                                    <Link to="https://airportmetrolimo.com/" aria-current="page"
+                                                        class="elementor-item elementor-item-active" tabindex="-1">Home</Link>
+                                                </li>
+                                                <li
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-170">
+                                                    <Link to="https://airportmetrolimo.com/about/" class="elementor-item"
+                                                        tabindex="-1">About</Link></li>
+                                                <li
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-145">
+                                                    <Link to="https://airportmetrolimo.com/our-services/"
+                                                        class="elementor-item" tabindex="-1">Our Services</Link>
+                                                    <ul class="sub-menu elementor-nav-menu--dropdown">
+                                                        <li
+                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-204">
+                                                            <Link to="https://airportmetrolimo.com/airport-transportation/"
+                                                                class="elementor-sub-item" tabindex="-1">Airport
+                                                                Transportation</Link></li>
+                                                        <li
+                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-236">
+                                                            <Link to="https://airportmetrolimo.com/corporate-transportation/"
+                                                                class="elementor-sub-item" tabindex="-1">Corporate
+                                                                Transportation</Link></li>
+                                                        <li
+                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-255">
+                                                            <Link to="https://airportmetrolimo.com/night-services/"
+                                                                class="elementor-sub-item" tabindex="-1">Night Services</Link>
+                                                        </li>
+                                                        <li
+                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254">
+                                                            <Link to="https://airportmetrolimo.com/wedding-services/"
+                                                                class="elementor-sub-item" tabindex="-1">Wedding
+                                                                Services</Link></li>
+                                                        <li
+                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-273">
+                                                            <Link to="https://airportmetrolimo.com/prom-services/"
+                                                                class="elementor-sub-item" tabindex="-1">Prom Services</Link>
+                                                        </li>
+                                                        <li
+                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-293">
+                                                            <Link to="https://airportmetrolimo.com/roadshow/"
+                                                                class="elementor-sub-item" tabindex="-1">Roadshow</Link></li>
+                                                        <li
+                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-321">
+                                                            <Link to="https://airportmetrolimo.com/bachelor-parties/"
+                                                                class="elementor-sub-item" tabindex="-1">Bachelor
+                                                                Parties</Link></li>
+                                                        <li
+                                                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-341">
+                                                            <Link to="https://airportmetrolimo.com/casino-tours/"
+                                                                class="elementor-sub-item" tabindex="-1">Casino Tours</Link>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137">
+                                                    <Link to="https://airportmetrolimo.com/reservation/"
+                                                        class="elementor-item" tabindex="-1">Reservation</Link></li>
+                                                <li
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-169">
+                                                    <Link to="https://airportmetrolimo.com/contact-us/"
+                                                        class="elementor-item" tabindex="-1">Contact Us</Link></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-cfb1eb0"
+                            data-id="cfb1eb0" data-element_type="column">
+                            <div class="elementor-widget-wrap elementor-element-populated">
+                                <div class="elementor-element elementor-element-24863c56 elementor-align-justify elementor-mobile-align-center elementor-widget elementor-widget-button"
+                                    data-id="24863c56" data-element_type="widget" data-widget_type="button.default">
+                                    <div class="elementor-widget-container">
+                                        <div class="elementor-button-wrapper">
+                                            <Link to="tel:+447446158821"
+                                                class="elementor-button-link elementor-button elementor-size-md"
+                                                role="button " style={{ width: '250px' }}>
+                                                <span class="elementor-button-content-wrapper">
+                                                    <span class="elementor-button-icon elementor-align-icon-left">
+                                                        <i aria-hidden="true" class="fas fa-phone-alt"></i> </span>
+                                                    <span class="elementor-button-text">+447446158821</span>
+                                                </span>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+            </div>
+        </header>
+    )
+}
+
+export default Header
