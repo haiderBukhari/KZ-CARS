@@ -121,33 +121,26 @@ const Body = () => {
                                                         data-widget_type="heading.default">
                                                         <div className="elementor-widget-container">
                                                             <p className="elementor-heading-title elementor-size-default">
-                                                                Welcome to KZ Cars, your premier destination for
-                                                                luxury transportation services. Drawing upon our extensive
-                                                                expertise and unwavering dedication to perfection, Detroit
-                                                                KZ Cars provide a flawless, seamless travel
-                                                                experience, exceptionally comfortable and entirely
-                                                                stress-free. KZ Cars diverse fleet of
-                                                                meticulously maintained vehicles, including Audi and
-                                                                Mercedes , equipped with modern amenities to ensure
-                                                                comfort. Our professional chauffeurs prioritize your safety
-                                                                and satisfaction and are highly skilled, punctual, and
-                                                                knowledgeable. Whether you need airport transfers,
-                                                                transportation for corporate events, or special occasions
-                                                                like weddings, Manchester Airport Town Car unwavering
-                                                                commitment lies in delivering exceptional service
-                                                                custom-tailored to meet your requirements. Discover the
-                                                                convenience, reliability, and elegance that KZ Cars Service.
-                                                            
-                                                                Choose KZ Cars for a journey that exceeds your
-                                                                expectations. Our 24/7 availability ensures that you receive
-                                                                reliable and punctual service anytime. With our attention to
-                                                                detail, personalized service, and competitive pricing, we
-                                                                aim to make your transportation experience exceptional.
-                                                                Get in touch with our welcoming customer service team today
-                                                                to reserve your airport transfer or inquire about our wide
-                                                                range of transportation services. Trust KZ CARS
-                                                                Car for a luxurious and memorable journey from start to
-                                                                finish.</p>
+                                                            Welcome to KZ CARS Services, where you can experience the best in upscale transportation. 
+                                                            Our team at Manchester is dedicated to providing you with a seamless and perfect travel 
+                                                            experience that is incredibly comfortable and stress-free. We have a diverse fleet of 
+                                                            well-maintained vehicles, including top brands like Audi and Mercedes, equipped with modern
+                                                            amenities to ensure your comfort.
+
+                                                            Our professional drivers prioritize your safety and satisfaction. They are highly skilled,
+                                                            punctual, and know their way around. Whether you need a ride to the airport, transportation 
+                                                            for business events, or for special occasions like weddings, you can trust us to deliver 
+                                                            exceptional service that is tailored to your needs. We want you to enjoy the convenience, 
+                                                            reliability, and elegance that Luxury Travel Services offers. Choose us for a journey that 
+                                                            exceeds your expectations.
+
+                                                            We are available 24/7, so you can count on us for reliable and punctual service anytime you 
+                                                            need it. We pay close attention to details, offer personalized service, and have competitive 
+                                                            pricing to make your transportation experience outstanding. Get in touch with our friendly 
+                                                            customer service team today to book your airport transfer or ask about our wide range of 
+                                                            transportation services. Trust Luxury Travel Services to give you a luxurious and unforgettable 
+                                                            journey from beginning to end.
+                                                               .</p>
                                                         </div>
                                                     </div>
                                                     <div className="elementor-element elementor-element-5fb529cf elementor-widget-divider--view-line elementor-widget elementor-widget-divider"
