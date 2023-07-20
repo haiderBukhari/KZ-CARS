@@ -32,8 +32,18 @@ export const About = () => {
                                         </div>
                                         <div class="elementor-element elementor-element-665c8497 elementor-widget elementor-widget-text-editor" data-id="665c8497" data-element_type="widget" data-widget_type="text-editor.default">
                                             <div class="elementor-widget-container">
-                                                <p className='P-data'>At KZ Cars, we are your trusted partner for premium transportation services. With years of experience in the industry, we have established a solid reputation as a reliable and trustworthy supplier of top-notch transportation solutions. Our commitment to excellence, customer satisfaction, and attention to detail sets us apart, ensuring that your travel experience with us is exceptional. Whether you’re seeking airport transfers, corporate transportation, or special event services, KZ Cars service is here to exceed your expectations and deliver a seamless, comfortable, and memorable journey. Choose KZ Cars for reliable, luxurious, personalized transportation that elevates your travel experience.</p>						</div>
-                                        </div>
+                                                <p className='P-data'>
+                                    
+                                                At KZ Cars, we are your reliable companion for high-quality transportation services.
+                                                With extensive experience in the industry, we have built a strong reputation as a 
+                                            dependable and trustworthy provider of top-of-the-line transportation solutions. Our 
+                                            dedication to perfection, customer happiness, and meticulousness makes us stand out, 
+                                            guaranteeing that your journey with us is outstanding. Whether you need airport transfers,
+                                            corporate transportation, or services for special events, KZ Cars Service is here to go 
+                                            beyond your expectations and offer a smooth, comfortable, and unforgettable trip. Select 
+                                            KZ Cars Transport for dependable, luxurious, and personalized transportation that enhances 
+                                            your travel experience.
+                                            </div>
                                         <div class="elementor-element elementor-element-1ce2b238 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="1ce2b238" data-element_type="widget" data-widget_type="divider.default">
                                             <div class="elementor-widget-container">
                                                 <div class="elementor-divider">
