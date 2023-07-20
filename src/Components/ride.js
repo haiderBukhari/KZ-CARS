@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, useCallback } from 'react'
 import emailjs from '@emailjs/browser';
 import { toast } from 'react-toastify';
 import '../Components/Footer.css'
@@ -9,8 +9,89 @@ import audi from './audibck-removebg-preview.png'
 import merceedeez from './merc-removebg-preview.png'
 import map_pic from './map-pic.png'
 import { useNavigate } from 'react-router-dom';
+// import { createProxyMiddleware } from 'http-proxy-middleware';
 export const Ride = () => {
+    let [lat, setlat] = useState(null)
+    let [long, setlong] = useState(null)
+    let [distlat, setdistlat] = useState(null)
+    let [distlong, setdistlong] = useState(null)
     let naviage = useNavigate()
+    let [p2p, setp2p] = useState(false)
+    let [fromairport, setfromairport] = useState(false)
+    let [toairport, settoairport] = useState(true);
+    // const proxy = createProxyMiddleware({
+    //     target: 'https://maps.googleapis.com',
+    //     changeOrigin: true,
+    //   });
+    // const fetchData = async () => {
+    //     try {
+    //         const response = await fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=28.6554182,-74.005974|42.360081,-71.058884&destinations=40.712776,-77.16462|28.6279488,77.2786205&units=imperial&key=AIzaSyDNg7BjWsLwsbKk7Ex5dBwI5BCDlzi7uWs`);
+    //         const datas = await response.json();
+    //         console.log(datas.rows[0].elements[0].distance.value);
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // };
+
+    // useEffect(() => {
+    //     if (distlat !== null && distlong !== null && lat !== null && long !== null) {
+    //         fetchData();
+    //     }
+    // }, [distlat, distlong, lat, long]);
+    function deg2rad(deg) {
+        return deg * (Math.PI / 180);
+    }
+
+    function rad2deg(rad) {
+        return rad * (180 / Math.PI);
+    }
+    useEffect(() => {
+        const autocomplete = new window.google.maps.places.Autocomplete(
+            document.querySelector('#location1'),
+            { types: ['geocode'] }
+        );
+
+        autocomplete.addListener('place_changed', () => {
+            const place = autocomplete.getPlace();
+            console.log(place.formatted_address); // Prints the selected location
+            setdistlat(place.geometry.location.lat());
+            setdistlong(place.geometry.location.lng());
+            console.log(`${place.geometry.location.lat()} ${place.geometry.location.lng()}`);
+        });
+    }, [p2p]);
+
+    useEffect(() => {
+        const autocomplete = new window.google.maps.places.Autocomplete(
+            document.querySelector('#location'),
+            { types: ['geocode'] }
+        );
+        autocomplete.addListener('place_changed', () => {
+            const place = autocomplete.getPlace();
+            console.log(place.formatted_address); // Prints the selected location
+            if (toairport) {
+                setdistlat(place.geometry.location.lat())
+                setdistlong(place.geometry.location.lng())
+            }
+            if (fromairport || p2p) {
+                setlat(place.geometry.location.lat())
+                setlong(place.geometry.location.lng())
+            }
+        });
+    }, [p2p, toairport, fromairport]);
+    useEffect(()=>{
+        if (lat != null && long != null && distlat != null && distlong != null && lat != undefined && long != undefined && distlat != undefined && distlong != undefined) {
+            var gps1 = new window.google.maps.LatLng(lat,long);
+            var gps2 = new window.google.maps.LatLng(distlat, distlong);
+            if (window.google.maps.geometry) {
+                var total_distance = window.google.maps.geometry.spherical.computeDistanceBetween(gps1, gps2);
+                var total_distance_mile = total_distance / 1609.34;
+                let totalprice = obj.israndom?total_distance_mile*1.80:total_distance_mile*2.00;
+                setobj({...obj, price:totalprice.toFixed(3)})
+            } else {
+                console.error('Google Maps Geometry library is not loaded.');
+            }
+        }
+    }, [lat, long, distlat, distlong])
     useEffect(() => {
         console.log("ajaakajja");
     }, [])
@@ -19,7 +100,6 @@ export const Ride = () => {
     let [luggage, setluggage] = useState(0);
     let [showvehicle, setshowvehicle] = useState(true)
     let [showconfirm, setshowconfirm] = useState(false)
-    let [toairport, settoairport] = useState(true);
     let [obj, setobj] = useState({
         airporttype: 'From Airport (Airport to Home)',
         Pickupdate: '',
@@ -33,9 +113,10 @@ export const Ride = () => {
         isaudi: false,
         isMercedes: false,
         FirstName: "",
-        LastName:"",
-        Email:"",
-        ContactNumber:0,
+        LastName: "",
+        Email: "",
+        ContactNumber: 0,
+        price: 0
     })
     let handlechoice = () => {
         setshowconfirm(true)
@@ -43,65 +124,81 @@ export const Ride = () => {
             top: 1300,
             left: 0,
             behavior: 'smooth'
-          });   
+        });
     }
-    let finalsubmit = (e)=>{
+    let finalsubmit = (e) => {
         e.preventDefault();
         const emailParams = {
-            airporttype:obj.airporttype, 
-            Pickupdate:obj.Pickupdate, 
-            Time:obj.Time, 
-            Airport:obj.Airport, 
-            Location:obj.Location, 
-            Noofpassenger:obj.Noofpassenger, 
-            Noofluggage:obj.Noofluggage, 
-            israndom:obj.israndom===true?'Yes':'No',
-            isselective:obj.isselective===true?'Yes':'No', 
-            isaudi:obj.isaudi===true?'Yes':'No', 
-            isMercedes:obj.isMercedes===true?'Yes':'No', 
-            FirstName:obj.FirstName, 
-            LastName:obj.LastName, 
-            Email:obj.Email, 
-            ContactNumber:obj.ContactNumber, 
-        }    
+            airporttype: obj.airporttype,
+            Pickupdate: obj.Pickupdate,
+            Time: obj.Time,
+            Airport: obj.Airport,
+            Location: obj.Location,
+            Noofpassenger: obj.Noofpassenger,
+            Noofluggage: obj.Noofluggage,
+            israndom: obj.israndom === true ? 'Yes' : 'No',
+            isselective: obj.isselective === true ? 'Yes' : 'No',
+            isaudi: obj.isaudi === true ? 'Yes' : 'No',
+            isMercedes: obj.isMercedes === true ? 'Yes' : 'No',
+            FirstName: obj.FirstName,
+            LastName: obj.LastName,
+            Email: obj.Email,
+            ContactNumber: obj.ContactNumber,
+            price:obj.price
+        }
         emailjs.send('service_3qvwwz1', 'template_6ud8jbi', emailParams, 'NOwvdl2jH-V4fF3VM')
-      .then((result) => {
-        naviage('/')
-        toast.success('Your Order has been Successfully Booked!', {
-            position: "bottom-left",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
+            .then((result) => {
+                naviage('/')
+                toast.success('Your Order has been Successfully Booked!', {
+                    position: "bottom-left",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
 
-            theme: "colored",
-        })
-      }, (error) => {
-          toast.error('Error in Booking order!', {
-            position: "bottom-left",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "colored",
-        })
-        naviage('/reservation')
-      });
+                    theme: "colored",
+                })
+            }, (error) => {
+                toast.error('Error in Booking order!', {
+                    position: "bottom-left",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                })
+                naviage('/reservation')
+            });
     }
-    let handlevsubmit = ()=>{
+    let handlevsubmit = () => {
         window.scrollTo({
             top: 900,
             left: 0,
             behavior: 'smooth'
-          });        
+        });
     }
     let changeairport = (e) => {
-        settoairport(e.target.value === 'fairport' ? true : false)
-        setobj({ ...obj, airporttype: `${e.target.value === 'fairport' ? `From Airport (Airport to Home)` : `To Airport (Home to Airport)`}` })
+        setlat(null)
+        setlong(null)
+        setdistlat(null)
+        setdistlong(null)
+        settoairport(() => {
+            if (e.target.value === 'fairport') { return true }
+            else { return false }
+        })
+        setfromairport(() => {
+            if (e.target.value === 'tairport') { return true }
+            else { return false }
+        })
+        setp2p(() => {
+            if (e.target.value === 'ponitopoint') { return true }
+            else { return false }
+        })
+        setobj({ ...obj, airporttype: `${e.target.value === 'fairport' ? `From Airport (Airport to Home)` : e.target.value === 'ponitopoint' ? `Point to Point` : `To Airport (Home to Airport)`}` })
     }
     let handleridesubmit = (e) => {
         e.preventDefault();
@@ -155,6 +252,15 @@ export const Ride = () => {
     function handlechange(e) {
         setchange(e.target.value)
         setobj({ ...obj, Airport: e.target.value })
+        let result = data.find((arr) => arr.name === e.target.value)
+        if (fromairport) {
+            setdistlat(result.lat)
+            setdistlong(result.long)
+        }
+        if (toairport) {
+            setlat(result.lat)
+            setlong(result.long)
+        }
     }
     return (
         <div className="all">
@@ -168,6 +274,7 @@ export const Ride = () => {
                         <select onChange={changeairport}>
                             <option value="tairport" id="tairport" checked>To Airport</option>
                             <option value="fairport" id="fairport" selected>From Airport</option>
+                            <option value="ponitopoint" id="ponitopoint">Point to Point</option>
                         </select>                        <div className="sub">
                             <div className="left-div">
                                 <label className='label-tag margin' htmlFor="">Pick-Up Date</label>
@@ -184,7 +291,7 @@ export const Ride = () => {
                             <label className='label-tag margin' htmlFor="">{` ${toairport ? `Pick-Up Airport` : `Pick-Up Location`}`}</label>
                         }
                         {
-                            toairport ? (
+                            toairport && (
                                 <select onChange={handlechange}>
                                     <option id="" placeholder='Current Location' required>Current Location</option>
                                     {
@@ -193,13 +300,24 @@ export const Ride = () => {
                                         ))
                                     }
                                 </select>
-                            ) : (
-                                <input onChange={(e) => { setobj({ ...obj, Location: e.target.value }) }} type="text" name="" id="" placeholder='Your Pick-Up Location' required />
+                            )
+                        }
+                        {
+                            fromairport && (
+                                <input onChange={(e) => { setobj({ ...obj, Location: e.target.value }) }} type="text" name="" id="location" placeholder='Your Pick-Up Location' required />
+                            )
+                        }
+                        {
+                            p2p && (
+                                <input onChange={(e) => { setobj({ ...obj, Airport: e.target.value }) }} type="text" name="" id="location" placeholder='Your Pick-Up Location' required />
                             )
                         }
                         <label className='label-tag margin' htmlFor="">{`${toairport ? `Drop-Off Location` : `Drop-Off Airport`}`}</label>
                         {
-                            toairport ? (<input onChange={(e) => { setobj({ ...obj, Location: e.target.value }) }} type="text" name="" id="" placeholder='Your drop-off location' required />) : (<select onChange={handlechange}>
+                            toairport && (<input onChange={(e) => { setobj({ ...obj, Location: e.target.value }) }} type="text" name="" id="location" placeholder='Your drop-off location' required />)
+                        }
+                        {
+                            fromairport && (<select onChange={handlechange}>
                                 <option id="" placeholder='Current Location' required>Current Location</option>
                                 {
                                     data.map((arr) => (
@@ -207,6 +325,9 @@ export const Ride = () => {
                                     ))
                                 }
                             </select>)
+                        }
+                        {
+                            p2p && (<input onChange={(e) => { setobj({ ...obj, Location: e.target.value }) }} type="text" name="" id="location1" placeholder='Your drop-off location' required />)
                         }
                         <div className='luggage'>
                             <div className='left-luggage'>
@@ -261,7 +382,7 @@ export const Ride = () => {
                                 />
                                 <label className="label-tag ap-pa apply" htmlFor="random" onClick={() => { setshowvehicle(false); setobj({ ...obj, israndom: true, isselective: false, isaudi: false, isMercedes: false }) }}>
                                     <span
-                                     onClick={() => {
+                                        onClick={() => {
                                             document.getElementById("random").click();
                                             setshowvehicle(false);
                                             setobj({ ...obj, israndom: true, isselective: false, isaudi: false, isMercedes: false })
@@ -309,7 +430,7 @@ export const Ride = () => {
                                                 ))
                                             }
                                         </div>
-                                        <button onClick={() => { setobj({ ...obj, isaudi: true });handlechoice() }}>Book</button>
+                                        <button onClick={() => { setobj({ ...obj, isaudi: true }); handlechoice() }}>Book</button>
                                     </div>
                                     <div className='vehicles'>
                                         <h4 className='aaa'>Mercedes</h4>
@@ -338,24 +459,25 @@ export const Ride = () => {
                     showconfirm && (
                         <>
                             <form onSubmit={finalsubmit} className='confirmation'>
+                                <h3 className='cen'><span>£</span> {obj.price}</h3>
                                 <div className="name n1">
                                     <div className="f-name">
                                         <label htmlFor="fname" className='label-tag marg'>First Name</label>
-                                        <input onChange={(e)=>{setobj({...obj, FirstName:e.target.value})}} type="text" name="" id="fname" placeholder='First Name' />
+                                        <input onChange={(e) => { setobj({ ...obj, FirstName: e.target.value }) }} type="text" name="" id="fname" placeholder='First Name' />
                                     </div>
                                     <div className="l-name">
                                         <label htmlFor="lname" className='label-tag marg'>Last Name</label>
-                                        <input onChange={(e)=>{setobj({...obj, LastName:e.target.value})}} type="text" name="" id="lname" placeholder='Last Name' />
+                                        <input onChange={(e) => { setobj({ ...obj, LastName: e.target.value }) }} type="text" name="" id="lname" placeholder='Last Name' />
                                     </div>
                                 </div>
                                 <div className="name contact">
                                     <div className="f-name">
                                         <label htmlFor="contact" className='label-tag marg'>Contact Number</label>
-                                        <input onChange={(e)=>{setobj({...obj, ContactNumber:e.target.value})}} type="text" name="" id="contact" placeholder='(555) 555-5555' required />
+                                        <input onChange={(e) => { setobj({ ...obj, ContactNumber: e.target.value }) }} type="text" name="" id="contact" placeholder='(555) 555-5555' required />
                                     </div>
                                     <div className="l-name">
                                         <label htmlFor="email" className='label-tag marg'>Email Address</label>
-                                        <input onChange={(e)=>{setobj({...obj, Email:e.target.value})}} type="email" name="" id="email" placeholder='Email' required />
+                                        <input onChange={(e) => { setobj({ ...obj, Email: e.target.value }) }} type="email" name="" id="email" placeholder='Email' required />
                                     </div>
                                 </div>
                                 <div className='m-auto'>
