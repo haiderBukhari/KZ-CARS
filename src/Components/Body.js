@@ -189,28 +189,26 @@ const Body = () => {
                                         data-id="508d554a" data-element_type="widget"
                                         data-widget_type="text-editor.default">
                                         <div className="elementor-widget-container">
-                                            <p> KZ Cars is your trusted partner for all your transportation
-                                                needs. We pride ourselves on providing reliable private transportation
-                                                services that ensure a seamless travel experience. Whether heading to the
-                                                airport, attending a business meeting, or exploring a new city, Our
-                                                unwavering dedication lies in providing service that goes above and beyond,
-                                                surpassing your expectations with excellence. Our commitment to reliability
-                                                is evident in every aspect of our service. At KZ Cars Service, we
-                                                place the utmost importance on punctuality and efficiency throughout your
-                                                entire journey, from when you make your reservation until you reach your
-                                                desired destination. You can have complete peace of mind knowing that our
-                                                professional chauffeurs, with their wealth of experience and comprehensive
-                                                training, will ensure your punctual arrival at your destination in the
-                                                epitome of style. We meticulously maintain our fleet of vehicles to
-                                                guarantee a comfortable and safe journey. Whether you prefer a luxurious
-                                                sedan or a spacious SUV, our well-appointed cars have modern amenities to
-                                                enhance your travel experience. Experience peace of mind knowing that our
-                                                reliable private transportation services are available to meet your needs
-                                                whenever and wherever you require them. Trust Reliable Private
-                                                Transportation Services will provide you with the reliable, comfortable,
-                                                personalized transportation services you deserve. Contact us today to
-                                                reserve your upcoming journey, and let us handle all your transportation
-                                                requirements with utmost care.</p>
+                                            <p> Welcome to KZ Cars, your dependable partner for all your transportation needs.
+                                            We take pride in offering reliable private transportation services that ensure a 
+                                            smooth travel experience. Whether you're going to the airport, attending a business
+                                            meeting, or exploring a new city, we are dedicated to going above and beyond to 
+                                            exceed your expectations.
+
+                                            We understand the importance of being punctual and efficient throughout your journey,
+                                            from making your reservation to arriving at your destination. With our experienced 
+                                            and well-trained professional chauffeurs, you can trust that you'll reach your 
+                                            destination on time and in style.
+
+                                            Our fleet of vehicles is carefully maintained to provide a comfortable and safe journey. 
+                                            Whether you prefer a luxurious sedan or a spacious SUV, our cars are equipped with modern 
+                                            amenities to enhance your travel experience.
+
+                                            You can rely on our private transportation services whenever and wherever you need them. 
+                                            Trust KZ Cars to provide you with reliable, comfortable, and personalized transportation 
+                                            services. Contact us today to reserve your upcoming journey, and let us take care of all 
+                                            your transportation needs with utmost care.
+                                            .</p>
                                         </div>
                                     </div>
                                     <div className="elementor-element elementor-element-1c0de180 elementor-widget elementor-widget-image"
