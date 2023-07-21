@@ -19,6 +19,8 @@ export const Ride = () => {
     let [p2p, setp2p] = useState(false)
     let [fromairport, setfromairport] = useState(false)
     let [toairport, settoairport] = useState(true);
+
+    
     // const proxy = createProxyMiddleware({
     //     target: 'https://maps.googleapis.com',
     //     changeOrigin: true,
@@ -78,7 +80,7 @@ export const Ride = () => {
             }
         });
     }, [p2p, toairport, fromairport]);
-    useEffect(()=>{
+    let calculation_function = () => {
         if (lat != null && long != null && distlat != null && distlong != null && lat != undefined && long != undefined && distlat != undefined && distlong != undefined) {
             var gps1 = new window.google.maps.LatLng(lat,long);
             var gps2 = new window.google.maps.LatLng(distlat, distlong);
@@ -91,6 +93,9 @@ export const Ride = () => {
                 console.error('Google Maps Geometry library is not loaded.');
             }
         }
+    }
+    useEffect(()=>{
+        calculation_function();
     }, [lat, long, distlat, distlong])
     useEffect(() => {
         console.log("ajaakajja");
@@ -380,12 +385,12 @@ export const Ride = () => {
                                     }}
                                     checked={!showvehicle}
                                 />
-                                <label className="label-tag ap-pa apply" htmlFor="random" onClick={() => { setshowvehicle(false); setobj({ ...obj, israndom: true, isselective: false, isaudi: false, isMercedes: false }) }}>
+                                <label className="label-tag ap-pa apply" htmlFor="random" onClick={() => { setshowvehicle(false); setobj({ ...obj, israndom: true, isselective: false, isaudi: false, isMercedes: false });calculation_function(); }}>
                                     <span
                                         onClick={() => {
                                             document.getElementById("random").click();
                                             setshowvehicle(false);
-                                            setobj({ ...obj, israndom: true, isselective: false, isaudi: false, isMercedes: false })
+                                            setobj({ ...obj, israndom: true, isselective: false, isaudi: false, isMercedes: false });calculation_function();
                                         }}
                                     >
                                         Random Vehicle Charges £1.80/mile
@@ -400,16 +405,16 @@ export const Ride = () => {
                                     id="selective"
                                     onChange={() => {
                                         setshowvehicle(true);
-                                        setobj({ ...obj, israndom: false, isselective: true, isaudi: false, isMercedes: false })
+                                        setobj({ ...obj, israndom: false, isselective: true, isaudi: false, isMercedes: false });calculation_function();
                                     }}
                                     checked={showvehicle}
                                 />
-                                <label className="label-tag ap-pa pop" htmlFor="selective" onClick={() => { setshowvehicle(true); setobj({ ...obj, israndom: false, isselective: true, isaudi: false, isMercedes: false }) }}>
+                                <label className="label-tag ap-pa pop" htmlFor="selective" onClick={() => { setshowvehicle(true); setobj({ ...obj, israndom: false, isselective: true, isaudi: false, isMercedes: false });calculation_function(); }}>
                                     <span
                                         onClick={() => {
                                             document.getElementById("selective").click();
                                             setshowvehicle(true);
-                                            setobj({ ...obj, israndom: false, isselective: true, isaudi: false, isMercedes: false })
+                                            setobj({ ...obj, israndom: false, isselective: true, isaudi: false, isMercedes: false });calculation_function();
                                         }}
                                     >
                                         Select Vehicle Charges £2.0/mile
