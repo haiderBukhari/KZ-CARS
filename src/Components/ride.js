@@ -80,7 +80,7 @@ export const Ride = () => {
             }
         });
     }, [p2p, toairport, fromairport]);
-    let calculation_function = () => {
+    useEffect(()=>{
         if (lat != null && long != null && distlat != null && distlong != null && lat != undefined && long != undefined && distlat != undefined && distlong != undefined) {
             var gps1 = new window.google.maps.LatLng(lat,long);
             var gps2 = new window.google.maps.LatLng(distlat, distlong);
@@ -93,10 +93,7 @@ export const Ride = () => {
                 console.error('Google Maps Geometry library is not loaded.');
             }
         }
-    }
-    useEffect(()=>{
-        calculation_function();
-    }, [lat, long, distlat, distlong])
+    }, [lat, long, distlat, distlong, obj.israndom, obj.isselective])
     useEffect(() => {
         console.log("ajaakajja");
     }, [])
@@ -385,12 +382,12 @@ export const Ride = () => {
                                     }}
                                     checked={!showvehicle}
                                 />
-                                <label className="label-tag ap-pa apply" htmlFor="random" onClick={() => { setshowvehicle(false); setobj({ ...obj, israndom: true, isselective: false, isaudi: false, isMercedes: false });calculation_function(); }}>
+                                <label className="label-tag ap-pa apply" htmlFor="random" onClick={() => { setshowvehicle(false); setobj({ ...obj, israndom: true, isselective: false, isaudi: false, isMercedes: false }) }}>
                                     <span
                                         onClick={() => {
                                             document.getElementById("random").click();
                                             setshowvehicle(false);
-                                            setobj({ ...obj, israndom: true, isselective: false, isaudi: false, isMercedes: false });calculation_function();
+                                            setobj({ ...obj, israndom: true, isselective: false, isaudi: false, isMercedes: false })
                                         }}
                                     >
                                         Random Vehicle Charges £1.80/mile
@@ -405,16 +402,16 @@ export const Ride = () => {
                                     id="selective"
                                     onChange={() => {
                                         setshowvehicle(true);
-                                        setobj({ ...obj, israndom: false, isselective: true, isaudi: false, isMercedes: false });calculation_function();
+                                        setobj({ ...obj, israndom: false, isselective: true, isaudi: false, isMercedes: false })
                                     }}
                                     checked={showvehicle}
                                 />
-                                <label className="label-tag ap-pa pop" htmlFor="selective" onClick={() => { setshowvehicle(true); setobj({ ...obj, israndom: false, isselective: true, isaudi: false, isMercedes: false });calculation_function(); }}>
+                                <label className="label-tag ap-pa pop" htmlFor="selective" onClick={() => { setshowvehicle(true); setobj({ ...obj, israndom: false, isselective: true, isaudi: false, isMercedes: false }) }}>
                                     <span
                                         onClick={() => {
                                             document.getElementById("selective").click();
                                             setshowvehicle(true);
-                                            setobj({ ...obj, israndom: false, isselective: true, isaudi: false, isMercedes: false });calculation_function();
+                                            setobj({ ...obj, israndom: false, isselective: true, isaudi: false, isMercedes: false })
                                         }}
                                     >
                                         Select Vehicle Charges £2.0/mile
