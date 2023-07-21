@@ -93,7 +93,7 @@ export const Ride = () => {
                 console.error('Google Maps Geometry library is not loaded.');
             }
         }
-    }, [lat, long, distlat, distlong, obj.israndom, obj.isselective])
+    }, [lat, long, distlat, distlong])
     useEffect(() => {
         console.log("ajaakajja");
     }, [])
