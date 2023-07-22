@@ -461,7 +461,7 @@ export const Ride = () => {
                     showconfirm && (
                         <>
                             <form onSubmit={finalsubmit} className='confirmation'>
-                                <h3 className='cen'><span>£</span> {obj.israndom?obj.price*1.80:obj.price*2.00}</h3>
+                                <h3 className='cen'><span>£</span>{obj.israndom?obj.price*1.80:obj.price*2.00}</h3>
                                 <div className="name n1">
                                     <div className="f-name">
                                         <label htmlFor="fname" className='label-tag marg'>First Name</label>
