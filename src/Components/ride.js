@@ -87,8 +87,8 @@ export const Ride = () => {
             if (window.google.maps.geometry) {
                 var total_distance = window.google.maps.geometry.spherical.computeDistanceBetween(gps1, gps2);
                 var total_distance_mile = total_distance / 1609.34;
-                let totalprice = obj.israndom?total_distance_mile*1.80:total_distance_mile*2.00;
-                setobj({...obj, price:totalprice.toFixed(3)})
+                // let totalprice = obj.israndom?total_distance_mile*1.80:total_distance_mile*2.00;
+                setobj({...obj, price:total_distance_mile})
             } else {
                 console.error('Google Maps Geometry library is not loaded.');
             }
@@ -146,7 +146,7 @@ export const Ride = () => {
             LastName: obj.LastName,
             Email: obj.Email,
             ContactNumber: obj.ContactNumber,
-            price:obj.price
+            price:obj.israndom?obj.price*1.80:obj.price*2.00
         }
         emailjs.send('service_3qvwwz1', 'template_6ud8jbi', emailParams, 'NOwvdl2jH-V4fF3VM')
             .then((result) => {
@@ -461,7 +461,7 @@ export const Ride = () => {
                     showconfirm && (
                         <>
                             <form onSubmit={finalsubmit} className='confirmation'>
-                                <h3 className='cen'><span>£</span> {obj.price}</h3>
+                                <h3 className='cen'><span>£</span> {obj.israndom?obj.price*1.80:obj.price*2.00}</h3>
                                 <div className="name n1">
                                     <div className="f-name">
                                         <label htmlFor="fname" className='label-tag marg'>First Name</label>
