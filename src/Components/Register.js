@@ -12,7 +12,7 @@ export const Register = () => {
       password: password.current.value,
     }
     try {
-      const response = await fetch('http://localhost:8000/register', {
+      const response = await fetch(`https://kzcars-backend-data.onrender.com/register`, {
         method: 'POST',
         headers: { "content-Type": "application/json" },
         body: JSON.stringify(data)

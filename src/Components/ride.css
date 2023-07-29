@@ -284,3 +284,31 @@ td{
 .cen span{
     color: tomato;
 }
+.l-r{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.l-r button{
+    width: 120px;
+    background-color: rgb(8, 135, 167);
+}
+.l-r button:hover{
+    transform: translateY(-3px);
+}
+.l-r button:active{
+    transform: translateY(-2px);
+}
+.active-rr, .active-rr1{
+    margin-right: 10px;
+    box-shadow: 3px 3px 10px #ccc, -3px -3px 10px #ccc;
+    /* border: 2px solid #333; */
+    border: none;
+    border-top: 3px solid rgb(0, 73, 92);
+    border-bottom: 3px solid rgb(0, 73, 92);
+}
+.active-rr1{
+    margin-right: 0;
+    margin-left: 10px;
+}

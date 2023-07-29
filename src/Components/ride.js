@@ -9,18 +9,189 @@ import audi from './audibck-removebg-preview.png'
 import merceedeez from './merc-removebg-preview.png'
 import map_pic from './map-pic.png'
 import { useNavigate } from 'react-router-dom';
+import { add, remove } from '../Store/loginSlice';
+import { useDispatch, useSelector } from 'react-redux';
 // import { createProxyMiddleware } from 'http-proxy-middleware';
 export const Ride = () => {
+    let [islogined, setidlogined] = useState(!useSelector(state => state.loginState.islogin))
+    let [isloginedemail, setidloginedemailemail] = useState(useSelector(state => state.loginState.email))
+    let [isloginedcontact, setidloginedcontact] = useState(useSelector(state => state.loginState.contactnumber))
+    let [isloginedname, setidloginedname] = useState(useSelector(state => state.loginState.username))
+    let dispatch = useDispatch()
+    let [register, setregister] = useState(true)
     let [lat, setlat] = useState(null)
     let [long, setlong] = useState(null)
     let [distlat, setdistlat] = useState(null)
     let [distlong, setdistlong] = useState(null)
-    let naviage = useNavigate()
+    let naviage = useNavigate(useSelector(state => state.loginState.islogin))
     let [p2p, setp2p] = useState(false)
     let [fromairport, setfromairport] = useState(false)
     let [toairport, settoairport] = useState(true);
+    let password = useRef()
+    function success(name) {
+        toast.success(`User Successfully ${name}`, {
+            position: "bottom-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        })
+    }
+    function error(err) {
+        toast.error(err, {
+            position: "bottom-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        })
+    }
+    const handlesubmitdata = async (e) => {
+        e.preventDefault()
+        const data = {
+            name: obj.FullName,
+            contactnumber: obj.ContactNumber,
+            email: obj.Email,
+            password: password.current.value
+        }
+        try {
+            const response = await fetch(`https://kzcars-backend-data.onrender.com//register`, {
+                method: 'POST',
+                headers: { "content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+            if (response.ok) {
+                dispatch(add([obj.Email, obj.ContactNumber, obj.FullName]))
+                success("Registered")
+                setsumbit1(true)
+                window.scrollTo({
+                    top: 1500,
+                    left: 0,
+                    behavior: 'smooth'
+                });
+                setshowconfirm(false)
+            }
+            else {
+                let resdata = await response.json()
+                throw new Error(resdata)
+            }
+        }
+        catch (err) {
+            error(err.message)
+        }
+    }
 
-    
+    const handlesubmited = async (e) => {
+        e.preventDefault()
+        const data = {
+            "name": obj.FullName,
+            "fromlocation": obj.Airport,
+            "tolocation": obj.Location,
+            "email": obj.Email,
+            "data": obj.Pickupdate,
+            "time": obj.Time,
+            "Contact": obj.ContactNumber,
+            "price": obj.israndom ? obj.price * 1.80 : obj.price * 2.00,
+            "status": "Pending",
+        }
+        try {
+            const response = await fetch(`https://kzcars-backend-data.onrender.com/orders`, {
+                method: 'POST',
+                headers: { "content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+            const final_data = await response.json();
+            console.log(final_data);
+            toast.success("Ride Booked Successfully!", {
+                position: "bottom-left",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            })
+            naviage('/dashboard')
+        }
+        catch (err) {
+            error(err.message)
+        }
+        const emailParams = {
+            airporttype: obj.airporttype,
+            Pickupdate: obj.Pickupdate,
+            Time: obj.Time,
+            Airport: obj.Airport,
+            Location: obj.Location,
+            Noofpassenger: obj.Noofpassenger,
+            Noofluggage: obj.Noofluggage,
+            israndom: obj.israndom === true ? 'Yes' : 'No',
+            isselective: obj.isselective === true ? 'Yes' : 'No',
+            isaudi: obj.isaudi === true ? 'Yes' : 'No',
+            isMercedes: obj.isMercedes === true ? 'Yes' : 'No',
+            FullName: obj.FullName,
+            LastName: obj.LastName,
+            Email: obj.Email,
+            ContactNumber: obj.ContactNumber,
+            price: obj.israndom ? obj.price * 1.80 : obj.price * 2.00
+        }
+        emailjs.send('service_3qvwwz1', 'template_6ud8jbi', emailParams, 'NOwvdl2jH-V4fF3VM')
+            .then((result) => {
+                console.log(result);
+            }, (error) => {
+                toast.error('Error in Booking order You can Contact!', {
+                    position: "bottom-left",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                })
+                naviage('/reservation')
+            });
+
+    }
+    const handlelogin = async (e) => {
+        e.preventDefault()
+        const data = {
+            email: obj.Email,
+            password: password.current.value
+        }
+        try {
+            const response = await fetch(`https://kzcars-backend-data.onrender.com/login`, {
+                method: 'POST',
+                headers: { "content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+            const final_data = await response.json();
+            if (final_data.accessToken) {
+                dispatch(add([final_data.user.email, final_data.user.contact, final_data.user.name]))
+                setobj({ ...obj, FullName: final_data.user.name, ContactNumber: final_data.user.contactnumber, email: final_data.user.email })
+                success("Logged In")
+                setsumbit1(true)
+                window.scrollTo({
+                    top: 1300,
+                    left: 0,
+                    behavior: 'smooth'
+                });
+                setshowconfirm(false)
+            }
+            else {
+                throw new Error(final_data)
+            }
+        }
+        catch (err) {
+            error(err.message)
+        }
+    }
     // const proxy = createProxyMiddleware({
     //     target: 'https://maps.googleapis.com',
     //     changeOrigin: true,
@@ -47,6 +218,7 @@ export const Ride = () => {
     function rad2deg(rad) {
         return rad * (180 / Math.PI);
     }
+
     useEffect(() => {
         const autocomplete = new window.google.maps.places.Autocomplete(
             document.querySelector('#location1'),
@@ -80,15 +252,15 @@ export const Ride = () => {
             }
         });
     }, [p2p, toairport, fromairport]);
-    useEffect(()=>{
+    useEffect(() => {
         if (lat != null && long != null && distlat != null && distlong != null && lat != undefined && long != undefined && distlat != undefined && distlong != undefined) {
-            var gps1 = new window.google.maps.LatLng(lat,long);
+            var gps1 = new window.google.maps.LatLng(lat, long);
             var gps2 = new window.google.maps.LatLng(distlat, distlong);
             if (window.google.maps.geometry) {
                 var total_distance = window.google.maps.geometry.spherical.computeDistanceBetween(gps1, gps2);
                 var total_distance_mile = total_distance / 1609.34;
                 // let totalprice = obj.israndom?total_distance_mile*1.80:total_distance_mile*2.00;
-                setobj({...obj, price:total_distance_mile})
+                setobj({ ...obj, price: total_distance_mile })
             } else {
                 console.error('Google Maps Geometry library is not loaded.');
             }
@@ -102,6 +274,7 @@ export const Ride = () => {
     let [luggage, setluggage] = useState(0);
     let [showvehicle, setshowvehicle] = useState(true)
     let [showconfirm, setshowconfirm] = useState(false)
+    let [submit1, setsumbit1] = useState(false)
     let [obj, setobj] = useState({
         airporttype: 'From Airport (Airport to Home)',
         Pickupdate: '',
@@ -114,67 +287,26 @@ export const Ride = () => {
         isselective: true,
         isaudi: false,
         isMercedes: false,
-        FirstName: "",
-        LastName: "",
+        FullName: "",
         Email: "",
         ContactNumber: 0,
         price: 0
     })
+    useEffect(() => {
+        if (!islogined) {
+            setobj({ ...obj, FullName: isloginedname, ContactNumber: isloginedcontact, Email: isloginedemail })
+        }
+    }, [islogined])
     let handlechoice = () => {
         setshowconfirm(true)
+        if(!islogined){
+            setsumbit1(true)
+        }
         window.scrollTo({
             top: 1300,
             left: 0,
             behavior: 'smooth'
         });
-    }
-    let finalsubmit = (e) => {
-        e.preventDefault();
-        const emailParams = {
-            airporttype: obj.airporttype,
-            Pickupdate: obj.Pickupdate,
-            Time: obj.Time,
-            Airport: obj.Airport,
-            Location: obj.Location,
-            Noofpassenger: obj.Noofpassenger,
-            Noofluggage: obj.Noofluggage,
-            israndom: obj.israndom === true ? 'Yes' : 'No',
-            isselective: obj.isselective === true ? 'Yes' : 'No',
-            isaudi: obj.isaudi === true ? 'Yes' : 'No',
-            isMercedes: obj.isMercedes === true ? 'Yes' : 'No',
-            FirstName: obj.FirstName,
-            LastName: obj.LastName,
-            Email: obj.Email,
-            ContactNumber: obj.ContactNumber,
-            price:obj.israndom?obj.price*1.80:obj.price*2.00
-        }
-        emailjs.send('service_3qvwwz1', 'template_6ud8jbi', emailParams, 'NOwvdl2jH-V4fF3VM')
-            .then((result) => {
-                naviage('/')
-                toast.success('Your Order has been Successfully Booked!', {
-                    position: "bottom-left",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-
-                    theme: "colored",
-                })
-            }, (error) => {
-                toast.error('Error in Booking order!', {
-                    position: "bottom-left",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "colored",
-                })
-                naviage('/reservation')
-            });
     }
     let handlevsubmit = () => {
         window.scrollTo({
@@ -420,7 +552,7 @@ export const Ride = () => {
                             </div>
                         </div>
                         {
-                            showvehicle && (
+                            (showvehicle) && (
                                 <div className='vehicle-main'>
                                     <div className='vehicles'>
                                         <h4 className='aaa'>Audi</h4>
@@ -454,44 +586,74 @@ export const Ride = () => {
                         </div>
                     </>
                 }
-                <div className="info-ride m-b">
-                    <label className='label-tag' htmlFor="">Step 3: Booking Confirmation (Final Step)</label>
-                </div>
                 {
-                    showconfirm && (
+                    islogined && <div className="info-ride m-b">
+                        <label className='label-tag' htmlFor="">Step 3: Register/ Login</label>
+                    </div>
+                }
+                {
+                    showconfirm && islogined && (
                         <>
-                            <form onSubmit={finalsubmit} className='confirmation'>
-                                <h3 className='cen'><span>£</span>{obj.israndom?obj.price*1.80:obj.price*2.00}</h3>
-                                <div className="name n1">
-                                    <div className="f-name">
-                                        <label htmlFor="fname" className='label-tag marg'>First Name</label>
-                                        <input onChange={(e) => { setobj({ ...obj, FirstName: e.target.value }) }} type="text" name="" id="fname" placeholder='First Name' />
-                                    </div>
-                                    <div className="l-name">
-                                        <label htmlFor="lname" className='label-tag marg'>Last Name</label>
-                                        <input onChange={(e) => { setobj({ ...obj, LastName: e.target.value }) }} type="text" name="" id="lname" placeholder='Last Name' />
-                                    </div>
-                                </div>
-                                <div className="name contact">
-                                    <div className="f-name">
-                                        <label htmlFor="contact" className='label-tag marg'>Contact Number</label>
-                                        <input onChange={(e) => { setobj({ ...obj, ContactNumber: e.target.value }) }} type="text" name="" id="contact" placeholder='(555) 555-5555' required />
-                                    </div>
-                                    <div className="l-name">
-                                        <label htmlFor="email" className='label-tag marg'>Email Address</label>
-                                        <input onChange={(e) => { setobj({ ...obj, Email: e.target.value }) }} type="email" name="" id="email" placeholder='Email' required />
-                                    </div>
-                                </div>
+                            <div className="l-r">
+                                <button onClick={() => { setregister(true) }} className={`${register ? "active-rr" : ""}`}>Register</button>
+                                <button onClick={() => { setregister(false) }} className={`${register ? "" : "active-rr1"}`}>Login</button>
+                            </div>
+                            <form onSubmit={(e) => { register ? handlesubmitdata(e) : handlelogin(e) }} className='confirmation'>
+                                {
+                                    register ? (<>
+                                        <div className="name n1">
+                                            <div className="f-name">
+                                                <label htmlFor="fname" className='label-tag marg'>Full Name</label>
+                                                <input onChange={(e) => { setobj({ ...obj, FullName: e.target.value }) }} type="text" name="" id="fname" placeholder='Full Name' />
+                                            </div>
+                                            <div className="l-name">
+                                                <label htmlFor="contact" className='label-tag marg'>Contact Number</label>
+                                                <input onChange={(e) => { setobj({ ...obj, ContactNumber: e.target.value }) }} type="text" name="" id="contact" placeholder='(555) 555-5555' required />
+                                            </div>
+                                        </div>
+                                        <div className="name contact">
+                                            <div className="f-name">
+                                                <label htmlFor="email" className='label-tag marg'>Email Address</label>
+                                                <input onChange={(e) => { setobj({ ...obj, Email: e.target.value }) }} type="email" name="" id="email" placeholder='Email' required />
+                                            </div>
+                                            <div className="l-name">
+                                                <label htmlFor="contact" className='label-tag marg'>Password</label>
+                                                <input type="password" name="" id="contact" placeholder='Password' required ref={password} />
+                                            </div>
+                                        </div>
+                                    </>) : (<>
+                                        <div className="name contact">
+                                            <div className="f-name">
+                                                <label htmlFor="email" className='label-tag marg'>Email Address</label>
+                                                <input onChange={(e) => { setobj({ ...obj, Email: e.target.value }) }} type="email" name="" id="email" placeholder='Email' required />
+                                            </div>
+                                            <div className="l-name">
+                                                <label htmlFor="contact" className='label-tag marg'>Password</label>
+                                                <input type="password" name="" id="contact" placeholder='Password' required ref={password} />
+                                            </div>
+                                        </div>
+                                    </>)
+                                }
                                 <div className='m-auto'>
-                                    <button type='submit' className='s-vehecle b-o'>Book Order</button>
+                                    <button type='submit' className='s-vehecle b-o'>{register ? 'Register' : 'Login'}</button>
                                 </div>
                             </form>
                         </>
                     )
                 }
+
+                <div className="info-ride m-b">
+                    <label className='label-tag' htmlFor="">{`Step ${islogined ? 4 : 3}:  Booking Confirmation & Price(Final Step)`}</label>
+                </div>
+                {
+                    submit1 && <>
+                        <h3 className='cen'><span>£</span>{obj.israndom ? obj.price * 1.80 : obj.price * 2.00}</h3>
+                        <div className='m-auto'>
+                            <button onClick={handlesubmited} type='submit' className='s-vehecle b-o'>Book</button>
+                        </div>
+                    </>
+                }
             </section>
-            {/* <div className='confirmation'> */}
         </div>
-        // </div>
     )
 }

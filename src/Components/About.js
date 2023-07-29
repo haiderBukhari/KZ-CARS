@@ -33,7 +33,6 @@ export const About = () => {
                                         <div class="elementor-element elementor-element-665c8497 elementor-widget elementor-widget-text-editor" data-id="665c8497" data-element_type="widget" data-widget_type="text-editor.default">
                                             <div class="elementor-widget-container">
                                                 <p className='P-data'>
-                                    
                                                 At KZ Cars, we are your reliable companion for high-quality transportation services.
                                                 With extensive experience in the industry, we have built a strong reputation as a 
                                             dependable and trustworthy provider of top-of-the-line transportation solutions. Our 
@@ -42,8 +41,7 @@ export const About = () => {
                                             corporate transportation, or services for special events, KZ Cars Service is here to go 
                                             beyond your expectations and offer a smooth, comfortable, and unforgettable trip. Select 
                                             KZ Cars Transport for dependable, luxurious, and personalized transportation that enhances 
-                                            your travel experience.
-                                            </div>
+                                            your travel experience.</p></div>
                                         <div class="elementor-element elementor-element-1ce2b238 elementor-widget-divider--view-line elementor-widget elementor-widget-divider" data-id="1ce2b238" data-element_type="widget" data-widget_type="divider.default">
                                             <div class="elementor-widget-container">
                                                 <div class="elementor-divider">
@@ -56,6 +54,7 @@ export const About = () => {
                                     </div>
                                 </div>
                             </div>
+                    </div>
                         </section>
                     </div>
                 </div>

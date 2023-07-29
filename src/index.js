@@ -3,18 +3,22 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ScrolltoTop } from './scrolltotop';
+import { Provider } from 'react-redux';
+import { store } from './Store/Store';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Router>
-      <App />
-      <ScrolltoTop/>
-      <ToastContainer />
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <App />
+        <ScrolltoTop />
+        <ToastContainer />
+      </Router>
+    </Provider>
   </React.StrictMode>
 );
 

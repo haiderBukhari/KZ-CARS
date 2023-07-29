@@ -1,9 +1,28 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './alpha.css'
 import Logo from './Logo.png'
 import { useLocation } from 'react-router-dom'
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { remove } from '../Store/loginSlice'
+import { toast } from 'react-toastify';
 const Header = () => {
+    let navigate = useNavigate()
+    let dispatch = useDispatch()
+    let handledelete = ()=>{
+        dispatch(remove())
+        toast.info("User Logged Out", {
+            position: "bottom-left",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        })
+        navigate('/')
+    }
     let clocation = useLocation();
     let [data, setdata] = useState({
         home: true,
@@ -49,48 +68,21 @@ const Header = () => {
                                         <nav
                                             class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-double-line e--animation-slide">
                                             <ul id="menu-1-70e89ab9" class="elementor-nav-menu">
-                                                <li
-                                                    onClick={() => {
-                                                        setdata({
-                                                            ...data,
-                                                            home: true,
-                                                            about: false,
-                                                            reservation: false,
-                                                            contact: false
-                                                        })
-                                                    }} class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6 current_page_item menu-item-60">
+                                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6 current_page_item menu-item-60">
                                                     <Link onClick={changehover} to="/" aria-current="page"
-                                                        class={`elementor-item ${clocation.pathname==='/' ? 'elementor-item-active' : ''}`}>Home</Link></li>
+                                                        class={`elementor-item ${clocation.pathname === '/' ? 'elementor-item-active' : ''}`}>Home</Link></li>
+                                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-170">
+                                                    <Link to="/about" class={`elementor-item ${clocation.pathname === '/about' ? 'elementor-item-active' : ''}`}>About</Link></li>
                                                 <li
-                                                    onClick={() => {
-                                                        setdata({
-                                                            ...data,
-                                                            home: false,
-                                                            about: true,
-                                                            reservation: false,
-                                                            contact: false
-                                                        })
-                                                    }} class="menu-item menu-item-type-post_type menu-item-object-page menu-item-170">
-                                                    <Link to="/about" class={`elementor-item ${clocation.pathname==='/about' ? 'elementor-item-active' : ''}`}>About</Link></li>
-                                                <li
-                                                    onClick={() => {
-                                                        setdata({
-                                                            home: false,
-                                                            about: false,
-                                                            reservation: true,
-                                                            contact: false
-                                                        })
-                                                    }} class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137">
-                                                    <Link to="/reservation" class={`elementor-item ${clocation.pathname==='/reservation' ? ` elementor-item-active` : ''}`}>Reservation</Link></li>
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137">
+                                                    <Link to="/reservation" class={`elementor-item ${clocation.pathname === '/reservation' ? ` elementor-item-active` : ''}`}>Reservation</Link></li>
+                                                {
+                                                    useSelector(state => state.loginState.islogin) ? <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-169">
+                                                        <Link to="/dashboard" class={`elementor-item ${clocation.pathname === '/dashboard' ? ` elementor-item-active` : ''}`}>DashBoard</Link></li> : <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-169">
+                                                        <Link to="/login" class={`elementor-item ${clocation.pathname === '/login' ? ` elementor-item-active` : ''}`}>Login/Register</Link></li>
+                                                }
                                                 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-169">
-                                                    <Link to="/contact" onClick={() => {
-                                                        setdata({
-                                                            home: false,
-                                                            about: false,
-                                                            reservation: false,
-                                                            contact: true
-                                                        })
-                                                    }} class={`elementor-item ${clocation.pathname==='/contact' ? ` elementor-item-active` : ''}`}>Contact Us</Link></li>
+                                                    <Link to="/contact" class={`elementor-item ${clocation.pathname === '/contact' ? ` elementor-item-active` : ''}`}>Contact Us</Link></li>
                                             </ul>
                                         </nav>
                                         <div class="elementor-menu-toggle" role="button" tabindex="0"
@@ -107,20 +99,25 @@ const Header = () => {
                                                 <li
                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6 current_page_item menu-item-60">
                                                     <a href="/" aria-current="page"
-                                                        class={`elementor-item ${clocation.pathname==='/' ? 'elementor-item-active' : ''}`} tabindex="-1">Home</a>
+                                                        class={`elementor-item ${clocation.pathname === '/' ? 'elementor-item-active' : ''}`} tabindex="-1">Home</a>
                                                 </li>
                                                 <li
                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-170">
-                                                    <a href="/about" class={`elementor-item ${clocation.pathname==='/about' ? 'elementor-item-active' : ''}`}
+                                                    <a href="/about" class={`elementor-item ${clocation.pathname === '/about' ? 'elementor-item-active' : ''}`}
                                                         tabindex="-1">About</a></li>
                                                 <li
                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137">
                                                     <a href="/reservation"
-                                                        class={`elementor-item ${clocation.pathname==='/reservation' ? ` elementor-item-active` : ''}`} tabindex="-1">Reservation</a></li>
+                                                        class={`elementor-item ${clocation.pathname === '/reservation' ? ` elementor-item-active` : ''}`} tabindex="-1">Reservation</a></li>
+                                                {
+                                                    useSelector(state => state.loginState.islogin) ? <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-169">
+                                                        <Link to="/dashboard" class={`elementor-item ${clocation.pathname === '/dashboard' ? ` elementor-item-active` : ''}`}>DashBoard</Link></li> : <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-169">
+                                                        <Link to="/login" class={`elementor-item ${clocation.pathname === '/login' ? ` elementor-item-active` : ''}`}>Login/Register</Link></li>
+                                                }
                                                 <li
                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-169">
                                                     <a href="contact"
-                                                        class={`elementor-item ${clocation.pathname==='/contact' ? ` elementor-item-active` : ''}`} tabindex="-1">Contact Us</a></li>
+                                                        class={`elementor-item ${clocation.pathname === '/contact' ? ` elementor-item-active` : ''}`} tabindex="-1">Contact Us</a></li>
                                             </ul>
                                         </nav>
                                     </div>
@@ -145,6 +142,11 @@ const Header = () => {
                                             </Link>
                                         </div>
                                     </div>
+                                    {
+                                        useSelector(state => state.loginState.islogin) && <div onClick={handledelete} className="bnn">
+                                        <button className='btnj'>Sign Out</button>
+                                    </div>
+                                    }
                                 </div>
                             </div>
                         </div>

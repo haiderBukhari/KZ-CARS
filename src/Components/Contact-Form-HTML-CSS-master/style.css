@@ -12,7 +12,7 @@ textarea {
   font-family: "Poppins", sans-serif;
 }
 
-.container {
+.container1 {
   position: relative;
   width: 100%;
   min-height: 100vh;
@@ -79,7 +79,7 @@ form {
   position: relative;
 }
 
-.title {
+.titles {
   color: #fff;
   font-weight: 500;
   font-size: 1.5rem;
@@ -203,7 +203,7 @@ textarea.input {
   position: relative;
 }
 
-.contact-info .title {
+.contact-info .titles {
   color: #15162C;
 }
 
@@ -225,11 +225,11 @@ textarea.input {
   margin-right: 0.7rem;
 }
 
-.social-media {
+.social-media1 {
   padding: 2rem 0 0 0;
 }
 
-.social-media p {
+.social-media1 p {
   color: #333;
 }
 
@@ -330,13 +330,13 @@ textarea.input {
     margin: 1rem 0 1.5rem 0;
   }
 
-  .social-media {
+  .social-media1 {
     padding: 1.5rem 0 0 0;
   }
 }
 
 @media (max-width: 480px) {
-  .container {
+  .container1 {
     padding: 1.5rem;
   }
 
@@ -356,11 +356,11 @@ textarea.input {
 
   .text,
   .information,
-  .social-media p {
+  .social-media1 p {
     font-size: 0.8rem;
   }
 
-  .title {
+  .titles {
     font-size: 1.15rem;
   }
 

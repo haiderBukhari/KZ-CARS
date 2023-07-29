@@ -51,7 +51,7 @@ export const ContactData = () => {
     <>
       <Header />
 
-      <div className="container tom">
+      <div className="container1 tom">
         <span className="big-circle"></span>
         <img src="img/shape.png" className="square" alt="" />
         <div className="form">
@@ -82,7 +82,7 @@ export const ContactData = () => {
               </div>
             </div>
 
-            <div className="social-media">
+            <div className="social-media1">
               <p>Connect with us :</p>
               <div className="social-icons">
                 <a href="https://www.facebook.com/profile.php?id=100090151488287&mibextid=ZbWKwL" target='blank'>
@@ -97,7 +97,7 @@ export const ContactData = () => {
             <span className="circle two"></span>
 
             <form onSubmit={handlesubmit} className='f-dta' action="index.html" autocomplete="off">
-              <h3 className="title">Contact us</h3>
+              <h3 className="titles">Contact us</h3>
               <div className="input-container">
                 <input onChange={(e)=>{setname(e.target.value)}} type="text" name="name" className="input my-input" placeholder='Name' required/>
                 <span></span>
