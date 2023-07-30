@@ -88,3 +88,9 @@ span{
     font-weight: bold;
     font-size: 20px;
 }
+.loading{
+    font-size: 24px;
+    color: tomato;
+    text-align: center;
+    margin:  44px 0;
+}

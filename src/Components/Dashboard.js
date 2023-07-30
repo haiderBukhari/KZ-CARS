@@ -191,9 +191,9 @@ export const Dashboard = () => {
   }
   let handlechange = async (name, fromlocation, tolocation, email, date, time, price, status, id, contact) => {
     const datarecord = doc(database, "kz-cars-orders", id)
-    await updateDoc(datarecord, { status: status }).then(fetchdata()).catch(err=>console.log(err))
-    setisfound(false)
-    dashboard.map((arr)=>{
+    await updateDoc(datarecord, { status: status }).then(data=>{
+      fetchdata()
+      data.map((arr)=>{
       if(arr.status === status){
         setisfound(true)
       }
@@ -201,6 +201,8 @@ export const Dashboard = () => {
         setisfound(false)
       }
     })
+    }).catch(err=>console.log(err))
+    setisfound(false)
     if (status === 'Approved') {
       const emailParams = {
         user: name,
@@ -269,6 +271,7 @@ export const Dashboard = () => {
     setisfound(false)
     dashboard.map((arr)=>{
       if(arr.status === e.target.value){
+        setvalidstatus(e.target.value)
         setisfound(true)
         return;
       }
@@ -287,9 +290,11 @@ export const Dashboard = () => {
         <option value="Completed">Completed</option>
       </select>
       {
-        dashboard.length === 0 ? <EmptyCart /> : isfound && <div className="all">
+        dashboard.length === 0 ? <EmptyCart /> :  <div className="all">
           {
             dashboard.map((arr) => (
+              validstatus === arr.status && (<>
+              
               <div className="above">
                 <p className='ps pc-1'><span className='sps'>Date</span>: {arr.data}</p>
                 <p className='ps pc-1'><span className='sps'>Time</span>: {arr.time}</p>
@@ -332,6 +337,7 @@ export const Dashboard = () => {
                   <button onClick={() => { deleterecord(arr.id) }} className='deleterecord'>Delete Record</button>
                 </div>
               </div>
+              </>)
             ))
           }
         </div>

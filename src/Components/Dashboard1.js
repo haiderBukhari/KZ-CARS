@@ -9,9 +9,11 @@ import { useSelector } from 'react-redux'
 export const Dashboard1 = () => {
     let [datass, setdatass] = useState(useSelector(state => state.loginState.email))
     let [dashboard, setdashboard] = useState([])
+    let [loading, setloading] = useState(false)
     const datacollection = collection(database, "kz-cars-orders")
     const fetchdata = async () => {
         try {
+            setloading(true)
             const listdata = await getDocs(datacollection)
             const filtereddata = listdata.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
             let filteredResponse = filtereddata.filter((arr) => {
@@ -20,9 +22,11 @@ export const Dashboard1 = () => {
                 }
             });
             setdashboard(filteredResponse)
+            setloading(false)
         }
         catch (err) {
             console.log(err);
+            setloading(true)
         }
     }
     useEffect(() => {
@@ -46,7 +50,10 @@ export const Dashboard1 = () => {
         <>
             <Header />
             {
-                dashboard.length === 0 ? <EmptyCart /> : <div className="all">
+                <p className='loading'>{loading && `Loading...`}</p>
+            }
+            {
+                dashboard.length === 0 && !loading ? <EmptyCart /> : (!loading) &&  <div className="all">
                     {
                         dashboard.map((arr) => (
                             <div className="above">
