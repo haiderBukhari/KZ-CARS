@@ -1,4 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from 'firebase/auth'
+import { auth } from './Config/Firebase';
 import emailjs from '@emailjs/browser';
 import { toast } from 'react-toastify';
 import '../Components/Footer.css'
@@ -11,6 +13,8 @@ import map_pic from './map-pic.png'
 import { useNavigate } from 'react-router-dom';
 import { add, remove } from '../Store/loginSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { database } from './Config/Firebase'
+import { getDocs, collection, addDoc } from 'firebase/firestore'
 // import { createProxyMiddleware } from 'http-proxy-middleware';
 export const Ride = () => {
     let [islogined, setidlogined] = useState(!useSelector(state => state.loginState.islogin))
@@ -52,6 +56,9 @@ export const Ride = () => {
             theme: "colored",
         })
     }
+    function error(err){
+        error(err.message)
+    }
     const handlesubmitdata = async (e) => {
         e.preventDefault()
         const data = {
@@ -61,12 +68,12 @@ export const Ride = () => {
             password: password.current.value
         }
         try {
-            const response = await fetch(`https://kzcars-backend-data.onrender.com//register`, {
-                method: 'POST',
-                headers: { "content-Type": "application/json" },
-                body: JSON.stringify(data)
-            })
-            if (response.ok) {
+            await createUserWithEmailAndPassword(auth, data.email, data.password).then(async (res) => {
+                const user = res.user;
+                await updateProfile(user, {
+                    displayName: data.name,
+                    phoneNumber: data.contactnumber
+                })
                 dispatch(add([obj.Email, obj.ContactNumber, obj.FullName]))
                 success("Registered")
                 setsumbit1(true)
@@ -76,17 +83,15 @@ export const Ride = () => {
                     behavior: 'smooth'
                 });
                 setshowconfirm(false)
-            }
-            else {
-                let resdata = await response.json()
-                throw new Error(resdata)
-            }
+            }).catch((err) => {
+                error(err)
+            })
         }
         catch (err) {
             error(err.message)
         }
     }
-
+    const datalist = collection(database, "kz-cars-orders")
     const handlesubmited = async (e) => {
         e.preventDefault()
         const data = {
@@ -101,24 +106,34 @@ export const Ride = () => {
             "status": "Pending",
         }
         try {
-            const response = await fetch(`https://kzcars-backend-data.onrender.com/orders`, {
-                method: 'POST',
-                headers: { "content-Type": "application/json" },
-                body: JSON.stringify(data)
+            await addDoc(datalist, {
+                name: obj.FullName,
+                fromlocation: obj.Airport,
+                tolocation: obj.Location,
+                email: obj.Email,
+                data: obj.Pickupdate,
+                time: obj.Time,
+                Contact: obj.ContactNumber,
+                price: obj.israndom ? obj.price * 1.80 : obj.price * 2.00,
+                status: "Pending",
+                status1: obj.israndom ? false : true,
+                audi: obj.isaudi,
+                mercedes: obj.isMercedes,
+            }).then(data => {
+                toast.success("Ride Booked Successfully!", {
+                    position: "bottom-left",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                })
+                naviage('/dashboard')
+            }).catch(err => {
+                error(err)
             })
-            const final_data = await response.json();
-            console.log(final_data);
-            toast.success("Ride Booked Successfully!", {
-                position: "bottom-left",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-            })
-            naviage('/dashboard')
         }
         catch (err) {
             error(err.message)
@@ -157,7 +172,6 @@ export const Ride = () => {
                 })
                 naviage('/reservation')
             });
-
     }
     const handlelogin = async (e) => {
         e.preventDefault()
@@ -166,15 +180,9 @@ export const Ride = () => {
             password: password.current.value
         }
         try {
-            const response = await fetch(`https://kzcars-backend-data.onrender.com/login`, {
-                method: 'POST',
-                headers: { "content-Type": "application/json" },
-                body: JSON.stringify(data)
-            })
-            const final_data = await response.json();
-            if (final_data.accessToken) {
-                dispatch(add([final_data.user.email, final_data.user.contact, final_data.user.name]))
-                setobj({ ...obj, FullName: final_data.user.name, ContactNumber: final_data.user.contactnumber, email: final_data.user.email })
+            signInWithEmailAndPassword(auth, data.email, data.password).then((userdata) => {
+                dispatch(add([data.email, userdata.user.phoneNumber, userdata.user.displayName]))
+                setobj({ ...obj, FullName: userdata.user.displayName, ContactNumber: userdata.user.phoneNumber, email: data.email })
                 success("Logged In")
                 setsumbit1(true)
                 window.scrollTo({
@@ -183,34 +191,14 @@ export const Ride = () => {
                     behavior: 'smooth'
                 });
                 setshowconfirm(false)
-            }
-            else {
-                throw new Error(final_data)
-            }
+            }).catch(err => {
+                throw new Error(err)
+            })
         }
         catch (err) {
             error(err.message)
         }
     }
-    // const proxy = createProxyMiddleware({
-    //     target: 'https://maps.googleapis.com',
-    //     changeOrigin: true,
-    //   });
-    // const fetchData = async () => {
-    //     try {
-    //         const response = await fetch(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=28.6554182,-74.005974|42.360081,-71.058884&destinations=40.712776,-77.16462|28.6279488,77.2786205&units=imperial&key=AIzaSyDNg7BjWsLwsbKk7Ex5dBwI5BCDlzi7uWs`);
-    //         const datas = await response.json();
-    //         console.log(datas.rows[0].elements[0].distance.value);
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     if (distlat !== null && distlong !== null && lat !== null && long !== null) {
-    //         fetchData();
-    //     }
-    // }, [distlat, distlong, lat, long]);
     function deg2rad(deg) {
         return deg * (Math.PI / 180);
     }
@@ -299,7 +287,7 @@ export const Ride = () => {
     }, [islogined])
     let handlechoice = () => {
         setshowconfirm(true)
-        if(!islogined){
+        if (!islogined) {
             setsumbit1(true)
         }
         window.scrollTo({

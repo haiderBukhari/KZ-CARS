@@ -3,24 +3,45 @@ import Header from './Header'
 import Footer from './Footer'
 import { EmptyCart } from './Reservation'
 import './Dashboard.css'
+import { database } from './Config/Firebase'
+import { getDocs, collection } from 'firebase/firestore'
 import { useSelector } from 'react-redux'
 export const Dashboard1 = () => {
     let [datass, setdatass] = useState(useSelector(state => state.loginState.email))
     let [dashboard, setdashboard] = useState([])
+    const datacollection = collection(database, "kz-cars-orders")
     const fetchdata = async () => {
-        let data = await fetch(`https://kzcars-backend-data.onrender.com/orders`);
-        let response = await data.json();
-        let filteredResponse = response.filter((arr) => {
-            if (arr.email === datass) {
-                return arr;
-            }
-        });
-        setdashboard(filteredResponse.reverse());
+        try {
+            const listdata = await getDocs(datacollection)
+            const filtereddata = listdata.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+            let filteredResponse = filtereddata.filter((arr) => {
+                if (arr.email === datass) {
+                    return arr;
+                }
+            });
+            setdashboard(filteredResponse)
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
-
     useEffect(() => {
         fetchdata()
     }, [])
+    // const fetchdata1 = async () => {
+    //     let data = await fetch(`https://kzcars-backend-data.onrender.com/orders`);
+    //     let response = await data.json();
+    //     let filteredResponse = response.filter((arr) => {
+    //         if (arr.email === datass) {
+    //             return arr;
+    //         }
+    //     });
+    //     setdashboard(filteredResponse.reverse());
+    // }
+
+    // useEffect(() => {
+    //     fetchdata()
+    // }, [])
     return (
         <>
             <Header />
@@ -50,6 +71,10 @@ export const Dashboard1 = () => {
                                     <div className="flexs">
                                         <span className='aps'>Email:</span>
                                         <p className='ps'>{arr.email}</p>
+                                    </div>
+                                    <div className="flexs">
+                                        <span className='aps'>Car Status:</span>
+                                        <p className='ps'>{arr.status ? arr.audi ? "Selected (Audi)" : (arr.mercedes) ? "Selected (Mercedes)" : "Any Selected Vehicle" : "Random Vehicle"}</p>
                                     </div>
                                     <div className="flexs">
                                         <span className='aps'>Contact Number:</span>

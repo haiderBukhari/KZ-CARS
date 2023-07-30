@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
 import './Login.css'
 import { Register } from './Register';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from 'firebase/auth'
+import { auth } from './Config/Firebase';
 import Footer from './Footer';
 import Header from './Header';
 import signup from './signup.svg'
@@ -54,7 +56,9 @@ export const Login = () => {
             theme: "colored",
         })
     }
-
+    function callerror(err){
+        error(err.message)
+    }
     let handlelogin = async(e) => {
         e.preventDefault();
         const data = {
@@ -62,21 +66,15 @@ export const Login = () => {
             password: pass
         }
         try {
-            const response = await fetch(`https://kzcars-backend-data.onrender.com/login`, {
-                method: 'POST',
-                headers: { "content-Type": "application/json" },
-                body: JSON.stringify(data)
-            })
-            const final_data = await response.json();
-            console.log(final_data);
-            if (final_data.accessToken) {
-                dispatch(add([final_data.user.email, final_data.user.contact, final_data.user.name]))
+            signInWithEmailAndPassword(auth, data.email, data.password).then((userdata)=>{
+                dispatch(add([data.email, userdata.user.phoneNumber, userdata.user.displayName]))
                 success()
                 navigate('/dashboard')
-            }
-            else {
-                throw new Error(final_data)
-            }
+            }).catch(err => {
+                callerror(err)
+                // console.log(err);
+                // throw new Error(err)
+            })
         }
         catch (err) {
             error(err.message)
@@ -91,20 +89,18 @@ export const Login = () => {
             password: pass
         }
         try {
-            const response = await fetch(`https://kzcars-backend-data.onrender.com/register`, {
-                method: 'POST',
-                headers: { "content-Type": "application/json" },
-                body: JSON.stringify(data)
-            })
-            if (response.ok) {
+            await createUserWithEmailAndPassword(auth, data.email, data.password).then(async (res) => {
+                const user = res.user;
+                await updateProfile(user, {
+                    displayName: data.name,
+                    phoneNumber: data.contact
+                })
                 dispatch(add([email, contact, name]))
                 success()
                 navigate('/dashboard')
-            }
-            else {
-                let resdata = await response.json()
-                throw new Error(resdata)
-            }
+            }).catch((err)=>{
+                error(err)
+            })
         }
         catch (err) {
             error(err.message)

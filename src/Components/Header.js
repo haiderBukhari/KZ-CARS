@@ -1,6 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom'
 import './alpha.css'
 import Logo from './Logo.png'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from 'firebase/auth'
+import { auth } from './Config/Firebase';
 import { useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,6 +13,11 @@ const Header = () => {
     let dispatch = useDispatch()
     let handledelete = ()=>{
         dispatch(remove())
+        signOut(auth).then(() => {
+            console.log("signed out");
+        }).catch((error) => {
+            console.log("error signed out");
+        });
         toast.info("User Logged Out", {
             position: "bottom-left",
             autoClose: 3000,

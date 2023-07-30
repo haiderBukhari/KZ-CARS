@@ -73,3 +73,18 @@ span{
     justify-content: center;
     align-items: center;
 }
+.bnn:last-child{
+    margin: 20px 0 20px 0;
+}
+.deleterecord{
+    right: 10px;
+    width: 170px;
+}
+.selection{
+    margin: 20px auto;
+    width: 200px;
+    background-color: white;
+    color: tomato;
+    font-weight: bold;
+    font-size: 20px;
+}
