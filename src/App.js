@@ -15,7 +15,7 @@ const App = () => {
         <Route path='/about' element={<About/>}/>
         <Route path='/contact' element={<ContactData/>}/>
         <Route path='/Login' element={<Login/>}/>
-        <Route path='/dashboard' element={useSelector(state=>state.loginState.email)==='admin1@gmail.com'?<Dashboard/>:<Dashboard1/>}/>
+        <Route path='/dashboard' element={useSelector(state=>state.loginState.email)==='kz.cars.mcr@gmail.com'?<Dashboard/>:<Dashboard1/>}/>
         <Route path='*' element={<ContactData/>}/>
       </Routes>
   )
