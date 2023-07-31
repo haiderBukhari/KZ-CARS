@@ -268,10 +268,10 @@ export const Dashboard = () => {
   }
   let [isfound, setisfound] = useState(false)
   let handlechanged = async (e) => {
+    setvalidstatus(e.target.value)
     setisfound(false)
     dashboard.map((arr) => {
       if (arr.status === e.target.value) {
-        setvalidstatus(e.target.value)
         setisfound(true)
         return;
       }
