@@ -282,6 +282,14 @@ export const Dashboard = () => {
       }
     })
   }
+  function checkisfound(){
+    dashboard.map((arr)=>{
+      if(arr.status === currentstatus){
+        return true;
+      }
+    })
+    return false
+  }
   return (
     <>
       <Header />
@@ -292,7 +300,7 @@ export const Dashboard = () => {
         <option value="Completed">Completed</option>
       </select>
       {
-        dashboard.length === 0 ? <p className='loading'>{`No Item Found in ${currentstatus}....`}</p> : <div className="all">
+        dashboard.length === 0 || !currentstatus? <p className='loading'>{`No Item Found in ${currentstatus}....`}</p> : <div className="all">
           {
             dashboard.map((arr) => (
               validstatus === arr.status && (<>
