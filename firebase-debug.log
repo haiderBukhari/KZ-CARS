@@ -1,0 +1,44 @@
+[debug] [2023-07-31T11:32:17.802Z] ----------------------------------------------------------------------
+[debug] [2023-07-31T11:32:17.805Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\hp\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2023-07-31T11:32:17.805Z] CLI Version:   12.4.6
+[debug] [2023-07-31T11:32:17.805Z] Platform:      win32
+[debug] [2023-07-31T11:32:17.806Z] Node Version:  v18.16.0
+[debug] [2023-07-31T11:32:17.809Z] Time:          Mon Jul 31 2023 16:32:17 GMT+0500 (Pakistan Standard Time)
+[debug] [2023-07-31T11:32:17.809Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-07-31T11:32:17.872Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-07-31T11:32:17.873Z] > authorizing via signed-in user (i220980@nu.edu.pk)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\hp\Desktop\travelsite\travel-agency
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2023-07-31T11:32:21.489Z] Using project from CLI flag: kz-cars-e83fa
+[debug] [2023-07-31T11:32:21.493Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/kz-cars-e83fa [none]
+[debug] [2023-07-31T11:32:22.227Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/kz-cars-e83fa 200
+[debug] [2023-07-31T11:32:22.227Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/kz-cars-e83fa {"projectId":"kz-cars-e83fa","projectNumber":"861130910360","displayName":"KZ-Cars","name":"projects/kz-cars-e83fa","resources":{"hostingSite":"kz-cars-e83fa","storageBucket":"kz-cars-e83fa.appspot.com","locationId":"us-central"},"state":"ACTIVE","etag":"1_cf9f2c4e-5101-49dc-bda8-3dcaf69db15d"}
+[info] i  Using project kz-cars-e83fa (KZ-Cars) 
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
