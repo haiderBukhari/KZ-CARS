@@ -266,12 +266,14 @@ export const Dashboard = () => {
       });
     }
   }
+  let [currentstatus, setcurrentstatus] = useState('Pending')
   let [isfound, setisfound] = useState(false)
   let handlechanged = async (e) => {
-    setvalidstatus(e.target.value)
+    setcurrentstatus(e.target.value)
     setisfound(false)
     dashboard.map((arr) => {
       if (arr.status === e.target.value) {
+        setvalidstatus(e.target.value)
         setisfound(true)
         return;
       }
@@ -290,7 +292,7 @@ export const Dashboard = () => {
         <option value="Completed">Completed</option>
       </select>
       {
-        dashboard.length === 0 ? <p className='loading'>{`No Item Found in ${validstatus}....`}</p> : <div className="all">
+        dashboard.length === 0 ? <p className='loading'>{`No Item Found in ${currentstatus}....`}</p> : <div className="all">
           {
             dashboard.map((arr) => (
               validstatus === arr.status && (<>
