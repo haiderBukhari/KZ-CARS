@@ -171,11 +171,24 @@ export const Dashboard = () => {
   let [dashboard, setdashboard] = useState([])
   const datacollection = collection(database, "kz-cars-orders")
   const [validstatus, setvalidstatus] = useState("Pending")
+  let [load, setload] = useState(false)
   const fetchdata = async () => {
     try {
+      setload(true)
       const listdata = await getDocs(datacollection)
       const filtereddata = listdata.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
       setdashboard(filtereddata)
+      filtereddata.map((arr) => {
+        if ('Pending' === arr.status) {
+          setvalidstatus(arr.status)
+          setisfound(true)
+          return;
+        }
+        else {
+          setisfound(false)
+        }
+      })
+      setload(false)
     }
     catch (err) {
       console.log(err);
@@ -300,11 +313,14 @@ export const Dashboard = () => {
         <option value="Completed">Completed</option>
       </select>
       {
-        dashboard.length === 0 || !currentstatus? <p className='loading'>{`No Item Found in ${currentstatus}....`}</p> : <div className="all">
+        load && <p className='loading'>Loading....</p>
+      }
+      { !load && (
+
+        dashboard.length === 0 || !isfound? <p className='loading'>{`No Item Found in ${currentstatus}....`}</p> : <div className="all">
           {
             dashboard.map((arr) => (
-              validstatus === arr.status && (<>
-
+              isfound && (<>
                 <div className="above">
                   <p className='ps pc-1'><span className='sps'>Date</span>: {arr.data}</p>
                   <p className='ps pc-1'><span className='sps'>Time</span>: {arr.time}</p>
@@ -351,6 +367,7 @@ export const Dashboard = () => {
             ))
           }
         </div>
+      )
       }
       <Footer />
     </>
