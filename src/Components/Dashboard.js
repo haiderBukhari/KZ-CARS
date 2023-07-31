@@ -178,6 +178,7 @@ export const Dashboard = () => {
       const listdata = await getDocs(datacollection)
       const filtereddata = listdata.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
       setdashboard(filtereddata)
+      console.log(filtereddata);
       filtereddata.map((arr) => {
         if ('Pending' === arr.status) {
           setvalidstatus(arr.status)
