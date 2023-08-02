@@ -117,12 +117,12 @@ const Header = () => {
                                                     <a href="/reservation"
                                                         class={`elementor-item ${clocation.pathname === '/reservation' ? ` elementor-item-active` : ''}`} tabindex="-1">Reservation</a></li>
                                                 {
-                                                    useSelector(state => state.loginState.islogin) ? <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-169">
-                                                        <Link to="/dashboard" class={`elementor-item ${clocation.pathname === '/dashboard' ? ` elementor-item-active` : ''}`}>DashBoard</Link></li> : <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-169">
-                                                        <Link to="/login" class={`elementor-item ${clocation.pathname === '/login' ? ` elementor-item-active` : ''}`}>Login/Register</Link></li>
+                                                    useSelector(state => state.loginState.islogin) ? <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137">
+                                                        <a href="/dashboard" class={`elementor-item ${clocation.pathname === '/dashboard' ? ` elementor-item-active` : ''}`}>DashBoard</a></li> : <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137">
+                                                        <a href="/login" class={`elementor-item ${clocation.pathname === '/login' ? ` elementor-item-active` : ''}`}>Login/Register</a></li>
                                                 }
                                                 <li
-                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-169">
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137">
                                                     <a href="contact"
                                                         class={`elementor-item ${clocation.pathname === '/contact' ? ` elementor-item-active` : ''}`} tabindex="-1">Contact Us</a></li>
                                             </ul>
