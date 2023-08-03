@@ -17,6 +17,8 @@ import { database } from './Config/Firebase'
 import { getDocs, collection, addDoc } from 'firebase/firestore'
 // import { createProxyMiddleware } from 'http-proxy-middleware';
 export const Ride = () => {
+    let [disabled, setdisabled] = useState(false)
+    let [disabled1, setdisabled1] = useState(false)
     let [islogined, setidlogined] = useState(!useSelector(state => state.loginState.islogin))
     let [isloginedemail, setidloginedemailemail] = useState(useSelector(state => state.loginState.email))
     let [isloginedcontact, setidloginedcontact] = useState(useSelector(state => state.loginState.contactnumber))
@@ -60,6 +62,7 @@ export const Ride = () => {
         error(err.message)
     }
     const handlesubmitdata = async (e) => {
+        setdisabled1(true)
         e.preventDefault()
         const data = {
             name: obj.FullName,
@@ -83,12 +86,34 @@ export const Ride = () => {
                     behavior: 'smooth'
                 });
                 setshowconfirm(false)
+                setdisabled1(false)
             }).catch((err) => {
-                error(err)
+                setdisabled1(false)
+                toast.error(err.message, {
+                    position: "bottom-left",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                })
             })
         }
         catch (err) {
-            error(err.message)
+            setdisabled1(false)
+            toast.error(err.message, {
+                position: "bottom-left",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            })
+            // error(err.message)
         }
     }
     const datalist = collection(database, "kz-cars-orders")
@@ -174,6 +199,7 @@ export const Ride = () => {
             });
     }
     const handlelogin = async (e) => {
+        setdisabled(true)
         e.preventDefault()
         const data = {
             email: obj.Email,
@@ -191,12 +217,35 @@ export const Ride = () => {
                     behavior: 'smooth'
                 });
                 setshowconfirm(false)
+                setdisabled(false)
             }).catch(err => {
-                throw new Error(err)
+                setdisabled(false)
+                toast.error(err.message, {
+                    position: "bottom-left",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                })
+                // throw new Error(err)
             })
         }
         catch (err) {
-            error(err.message)
+            setdisabled(false)
+            toast.error(err.message, {
+                position: "bottom-left",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            })
+            // error(err.message)
         }
     }
     function deg2rad(deg) {
@@ -623,7 +672,7 @@ export const Ride = () => {
                                     </>)
                                 }
                                 <div className='m-auto'>
-                                    <button type='submit' className='s-vehecle b-o'>{register ? 'Register' : 'Login'}</button>
+                                    <button disabled={register?disabled1:disabled} type='submit' className='s-vehecle b-o'>{register ? 'Register' : 'Login'}</button>
                                 </div>
                             </form>
                         </>

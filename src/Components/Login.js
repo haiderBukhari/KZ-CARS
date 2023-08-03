@@ -12,6 +12,8 @@ import { toast } from 'react-toastify';
 import { add } from '../Store/loginSlice';
 import { useNavigate } from 'react-router-dom';
 export const Login = () => {
+    let [disabled, setdisabled] = useState(false)
+    let [disabled1, setdisabled1] = useState(false)
     let [name, setname] = useState('')
     let [email, setemail] = useState('')
     let [contact, setcontact] = useState('')
@@ -57,9 +59,11 @@ export const Login = () => {
         })
     }
     function callerror(err){
+        setdisabled(false)
         error(err.message)
     }
     let handlelogin = async(e) => {
+        setdisabled(true)
         e.preventDefault();
         const data = {
             email: email,
@@ -77,10 +81,12 @@ export const Login = () => {
             })
         }
         catch (err) {
+            setdisabled(false)
             error(err.message)
         }
     }
     let handlesignup = async(e) => {
+        setdisabled1(true)
         e.preventDefault();
         const data = {
             name:name, 
@@ -98,11 +104,13 @@ export const Login = () => {
                 dispatch(add([email, contact, name]))
                 success()
                 navigate('/dashboard')
+                setdisabled1(false)
             }).catch((err)=>{
-                error(err)
+                throw new Error(err)
             })
         }
         catch (err) {
+            setdisabled1(false)
             error(err.message)
         }
     }
@@ -122,7 +130,7 @@ export const Login = () => {
                                 <i class="fas fa-lock"></i>
                                 <input onChange={(e)=>{setpass(e.target.value)}} type="password" placeholder="Password" required/>
                             </div>
-                            <input type="submit" value="Login" class="btn solid" />
+                            <input disabled={disabled} type="submit" value="Login" class="btn solid" />
                         </form>
                         <form onSubmit={handlesignup} action="#" class="sign-up-form">
                             <h2 class="title">Sign up</h2>
@@ -146,7 +154,7 @@ export const Login = () => {
                                 <input onChange={(e)=>{setpass(e.target
                                     .value)}} type="password" placeholder="Password" required/>
                             </div>
-                            <input type="submit" class="btn" value="Sign up" />
+                            <input disabled={disabled1} type="submit" class="btn" value="Sign up" />
                         </form>
                     </div>
                 </div>
