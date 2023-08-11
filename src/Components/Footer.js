@@ -37,7 +37,7 @@ const Footer = () => {
                                                     <div class="elementor-social-icons-wrapper elementor-grid">
                                                         <span class="elementor-grid-item">
                                                             <a class="elementor-icon elementor-social-icon elementor-social-icon-facebook-f elementor-repeater-item-3f8352a"
-                                                                href='https://www.facebook.com/profile.php?id=100090151488287&mibextid=ZbWKwL' target="_blank">
+                                                                href='https://www.facebook.com/profile.php?id=100095529822750' target="_blank">
                                                                 <span
                                                                     class="elementor-screen-only">Facebook-f</span>
                                                                 <i class="fab fa-facebook-f"></i> </a>
@@ -183,9 +183,10 @@ const Footer = () => {
                                 data-id="6f8f8489" data-element_type="widget"
                                 data-widget_type="text-editor.default">
                                 <div class="elementor-widget-container">
-                                    <p><strong><a href="tel:+447827882962"><i><span
-                                                        style={{color: '#ffffff'}}>+447827882962</span></i></a></strong>
-                                    </p>
+                                {/* 447827882962 */}
+                                    {/* <p><strong><a href="tel:+000"><i><span */}
+                                                        {/* style={{color: '#ffffff'}}>+</span></i></a></strong> */}
+                                    {/* </p> */}
                                     <p><span style={{color: '#ffffff'}}><a style={{color: '#ffffff'}}
                                                 href="tel:+447446158821"><strong>+447446158821</strong></a></span></p>
                                     <p>kz.cars.mcr@gmail.com</p>
