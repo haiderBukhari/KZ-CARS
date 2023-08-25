@@ -9,9 +9,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { remove } from '../Store/loginSlice'
 import { toast } from 'react-toastify';
 const Header = () => {
+    let [email, setEmail] = useState(useSelector(state => state.loginState.islogin));
     let navigate = useNavigate()
     let dispatch = useDispatch()
-    let handledelete = ()=>{
+    let handledelete = () => {
         dispatch(remove())
         signOut(auth).then(() => {
             console.log("signed out");
@@ -78,8 +79,13 @@ const Header = () => {
                                                 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-6 current_page_item menu-item-60">
                                                     <Link onClick={changehover} to="/" aria-current="page"
                                                         class={`elementor-item ${clocation.pathname === '/' ? 'elementor-item-active' : ''}`}>Home</Link></li>
-                                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-170">
-                                                    <Link to="/about" class={`elementor-item ${clocation.pathname === '/about' ? 'elementor-item-active' : ''}`}>About</Link></li>
+                                                {
+                                                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-170">
+                                                            <Link to="/about" class={`elementor-item ${clocation.pathname === '/about' ? 'elementor-item-active' : ''}`}>About</Link></li>
+                                                }
+                                                {/* <li
+                                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137">
+                                                    <Link to="/reservation" class={`elementor-item ${clocation.pathname === '/discounts' ? ` elementor-item-active` : ''}`}>Reviews</Link></li> */}
                                                 <li
                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137">
                                                     <Link to="/reservation" class={`elementor-item ${clocation.pathname === '/reservation' ? ` elementor-item-active` : ''}`}>Reservation</Link></li>
@@ -108,10 +114,16 @@ const Header = () => {
                                                     <a href="/" aria-current="page"
                                                         class={`elementor-item ${clocation.pathname === '/' ? 'elementor-item-active' : ''}`} tabindex="-1">Home</a>
                                                 </li>
-                                                <li
+                                                {/* <li
                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-170">
                                                     <a href="/about" class={`elementor-item ${clocation.pathname === '/about' ? 'elementor-item-active' : ''}`}
-                                                        tabindex="-1">About</a></li>
+                                                        tabindex="-1">About</a></li> */}
+                                                {
+                                                    <li
+                                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-170">
+                                                        <a href="/about" class={`elementor-item ${clocation.pathname === '/about' ? 'elementor-item-active' : ''}`}
+                                                            tabindex="-1">About</a></li>
+                                                }
                                                 <li
                                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-137">
                                                     <a href="/reservation"
@@ -151,8 +163,8 @@ const Header = () => {
                                     </div>
                                     {
                                         useSelector(state => state.loginState.islogin) && <div onClick={handledelete} className="bnn">
-                                        <button className='btnj'>Sign Out</button>
-                                    </div>
+                                            <button className='btnj'>Sign Out</button>
+                                        </div>
                                     }
                                 </div>
                             </div>

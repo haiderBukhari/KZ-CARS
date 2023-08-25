@@ -1,4 +1,4 @@
-.elementor-widget-image {
+/* .elementor-widget-image {
   text-align: center
 }
 .elementor-widget-image a {
@@ -10,4 +10,26 @@
 .elementor-widget-image img {
   vertical-align: middle;
   display: inline-block
+} */
+.maintainance{
+  height: 100vh;
+  width: 100vw;
+  background-color: tomato;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sub-patient{
+  height: 400px;
+  width: 400px;
+  background-color: #fff;
+  border-radius:10px;
+  box-shadow: 4px 5px 10px rgb(207, 138, 125), -4px -5px 10px  rgb(207, 138, 125);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.p-patient{
+  font-size: 23px;
+
 }

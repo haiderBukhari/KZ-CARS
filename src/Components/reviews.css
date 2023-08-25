@@ -1,0 +1,137 @@
+.main-sec{
+    min-height: 100vh;
+    width: 100%;
+    background-color: rgba(22, 21, 21, 0.7);
+    padding: 20px 0;
+}
+.main-reviews{
+    margin: 0 20px;
+}
+.box-reviews{
+    border-radius: 10px;
+    width: 400px;
+    height: 520px;
+    padding: 40px 20px;
+    background-color: #fff;
+    box-shadow: 2px 2px 4px #dedede, -2px -2px 4px #dedede;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin: 20px 20px;
+    overflow: hidden;
+}
+.h2-discountplan{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 20px;
+    font-size: 28px;
+    font-weight: 400;
+}
+.h1-discountplan{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: tomato;
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+.h1-discountplan span{
+    color: #000;
+    font-size: 22px;
+}
+.p1-discountplan-1{
+    text-align: center;
+    line-height: 1.8rem;
+    padding: 0 20px;
+}
+.button-discountplan{
+    position: absolute;
+    border-radius: 14px;
+    width: 200px;
+    bottom: 4%;
+}
+.ribbon-wrap{
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    position: absolute;
+    top: -7px;
+    left: -7px;
+}
+.ribbon-wrap::before, .ribbon-wrap::after{
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: #f2467b;
+    position: absolute;
+    z-index: -1;
+}
+.ribbon-wrap::before{
+    top: 0;
+    right: 0;
+}
+.ribbon-wrap::after{
+    bottom: 0;
+    left: 0;
+}
+.ribbon{
+    width: 225px;
+    font-size: 15px;
+    text-align: center;
+    padding: 8px 0;
+    background: #ff2166;
+    color: #fff;
+    position: absolute;
+    transform: rotate(-45deg);
+    right: -17%;
+    top: 29%;
+}
+.number-review{
+    max-width: 300px;
+    margin: auto;
+}
+.number-review-1{
+    max-width: 600px;
+    margin: auto;
+}
+.number-review-2{
+    max-width: 600px;
+    margin: auto;
+}
+.center-review{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+.btn-review{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.adding-btn{
+    width: 100px;
+    margin: 10px 0;
+}
+.ppp{
+    margin: 4px;
+}
+.all-reviews{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.delete-review{
+    width: 100px;
+    position: absolute;
+    right: 7px;
+    top: -10px;
+}
+.loading-state{
+    height: 80vh;
+    color: #fff;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
