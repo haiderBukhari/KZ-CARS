@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import './Footer.css'
 const Footer = () => {
     return (
@@ -217,12 +216,6 @@ const Footer = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="links-d">
-                            <Link className='link-di' to='/discounts'>Discounts</Link>
-                            <Link className='link-di' to='/reviews'>Reviews</Link>
-                            <Link className='link-di' to='/gallery'>Gallery</Link>
-                            <Link className='link-di' to='/privacy-policy'>Privacy Policy</Link>
-                        </div>
                     </section>
                     <section
                         class="elementor-section elementor-top-section elementor-element elementor-element-1fed0c42 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default"
@@ -249,8 +242,7 @@ const Footer = () => {
                                     <div class="elementor-element elementor-element-144128fa elementor-icon-list--layout-inline elementor-align-right elementor-mobile-align-center elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list"
                                         data-id="144128fa" data-element_type="widget" data-widget_type="icon-list.default">
                                         <div class="elementor-widget-container">
-                                            <link rel="stylesheet"
-                                                href="https://airportmetrolimo.com/wp-content/plugins/elementor/assets/css/widget-icon-list.min.css" />
+                                            {/* <link rel="stylesheet" href="https://airportmetrolimo.com/wp-content/plugins/elementor/assets/css/widget-icon-list.min.css" /> */}
                                         </div>
                                     </div>
                                 </div>

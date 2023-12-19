@@ -52,14 +52,14 @@ const Body = () => {
                                         data-id="a19fa97" data-element_type="widget" data-widget_type="button.default">
                                         <div className="elementor-widget-container">
                                             <div className="elementor-button-wrapper">
-                                                <Link to="/reservation"
+                                                <a href="/reservation"
                                                     className="elementor-button-link elementor-button elementor-size-sm"
                                                     role="button">
                                                     <span className="elementor-button-content-wrapper">
                                                         <span className="elementor-button-text">MAKE A RESERVATION</span>
                                                     </span>
 
-                                                </Link>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
@@ -433,13 +433,13 @@ const Body = () => {
                                         data-id="44c62382" data-element_type="widget" data-widget_type="button.default">
                                         <div className="elementor-widget-container">
                                             <div className="elementor-button-wrapper">
-                                                <Link to="/reservation"
+                                                <a href="/reservation"
                                                     className="elementor-button-link elementor-button elementor-size-sm"
                                                     role="button">
                                                     <span className="elementor-button-content-wrapper">
                                                         <span className="elementor-button-text">Book Reservation</span>
                                                     </span>
-                                                </Link>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
