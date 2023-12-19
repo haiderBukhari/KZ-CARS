@@ -71,7 +71,7 @@ const Header = () => {
                                     data-settings="{&quot;full_width&quot;:&quot;stretch&quot;,&quot;layout&quot;:&quot;horizontal&quot;,&quot;submenu_icon&quot;:{&quot;value&quot;:&quot;&lt;i class=\&quot;fas fa-caret-down\&quot;&gt;&lt;\/i&gt;&quot;,&quot;library&quot;:&quot;fa-solid&quot;},&quot;toggle&quot;:&quot;burger&quot;}"
                                     data-widget_type="nav-menu.default">
                                     <div class="elementor-widget-container">
-                                        {/* <link rel="stylesheet" href="https://airportmetrolimo.com/wp-content/plugins/elementor-pro/assets/css/widget-nav-menu.min.css" /> */}
+                                        <link rel="stylesheet" href="https://airportmetrolimo.com/wp-content/plugins/elementor-pro/assets/css/widget-nav-menu.min.css" />
                                         <nav
                                             class="elementor-nav-menu--main elementor-nav-menu__container elementor-nav-menu--layout-horizontal e--pointer-double-line e--animation-slide">
                                             <ul id="menu-1-70e89ab9" class="elementor-nav-menu">

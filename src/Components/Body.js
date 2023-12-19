@@ -299,7 +299,8 @@ const Body = () => {
                                                         data-id="7d901345" data-element_type="widget"
                                                         data-widget_type="icon-box.default">
                                                         <div className="elementor-widget-container">
-                                                            {/* <link rel="stylesheet" href="https://airportmetrolimo.com/wp-content/plugins/elementor/assets/css/widget-icon-box.min.css" /> */}
+                                                            <link rel="stylesheet"
+                                                                href="https://airportmetrolimo.com/wp-content/plugins/elementor/assets/css/widget-icon-box.min.css" />
                                                             <div className="elementor-icon-box-wrapper">
                                                                 <div className="elementor-icon-box-icon">
                                                                     <span className="elementor-icon elementor-animation-">
