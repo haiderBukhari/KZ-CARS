@@ -15,7 +15,49 @@ import { add, remove } from '../Store/loginSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { database } from './Config/Firebase'
 import { getDocs, collection, addDoc } from 'firebase/firestore'
+import { GoogleMap, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
+import underLinePic from "../Assets/underline.png"
 // import { createProxyMiddleware } from 'http-proxy-middleware';
+
+
+let googleApiLoaded = false;
+
+const MapContainer = ({ options, apiKey }) => {
+    const [directions, setDirections] = useState(null);
+
+    const directionsCallback = useCallback(
+        (result, status) => {
+            if (status === 'OK') {
+                setDirections(result);
+            } else {
+                console.error('Directions request failed due to ' + status);
+            }
+        },
+        []
+    );
+
+    return (
+        <GoogleMap
+            center={options.origin}
+            zoom={8}
+            mapContainerStyle={{ height: '510px', width: '100%' }}
+        >
+            {options.origin && options.destination && (
+                <DirectionsService
+                    options={{
+                        destination: options.destination,
+                        origin: options.origin,
+                        travelMode: 'DRIVING',
+                    }}
+                    callback={directionsCallback}
+                />
+            )}
+            {directions && <DirectionsRenderer directions={directions} />}
+        </GoogleMap>
+    );
+};
+
+
 export const Ride = () => {
     let [disabled, setdisabled] = useState(false)
     let [disabled1, setdisabled1] = useState(false)
@@ -25,14 +67,26 @@ export const Ride = () => {
     let [isloginedname, setidloginedname] = useState(useSelector(state => state.loginState.username))
     let dispatch = useDispatch()
     let [register, setregister] = useState(true)
-    let [lat, setlat] = useState(null)
-    let [long, setlong] = useState(null)
-    let [distlat, setdistlat] = useState(null)
-    let [distlong, setdistlong] = useState(null)
+    let [lat, setlat] = useState(53.4808)
+    let [long, setlong] = useState(-2.2426)
+    let [distlat, setdistlat] = useState(53.9808)
+    let [distlong, setdistlong] = useState(-2.2426)
     let naviage = useNavigate(useSelector(state => state.loginState.islogin))
     let [p2p, setp2p] = useState(false)
     let [fromairport, setfromairport] = useState(false)
     let [toairport, settoairport] = useState(true);
+    const [directions, setDirections] = useState(null);
+    const [options, setOption] = useState({});
+    const [checkboxVerified, setCheckboxVerified] = useState(false);
+    const apiKey = 'AIzaSyCgE_NjJK_ZRHTcZUCYSG8dYAAwS_idFPU';
+    useEffect(() => {
+        if (lat && long && distlat && distlong) {
+            setOption({
+                origin: { lat: lat, lng: long }, // Toronto
+                destination: { lat: distlat, lng: distlong }, // Montreal
+            })
+        }
+    }, [lat, long, distlat, distlong])
     let password = useRef()
     function success(name) {
         toast.success(`User Successfully ${name}`, {
@@ -58,7 +112,7 @@ export const Ride = () => {
             theme: "colored",
         })
     }
-    function error(err){
+    function error(err) {
         error(err.message)
     }
     const handlesubmitdata = async (e) => {
@@ -127,7 +181,7 @@ export const Ride = () => {
             "data": obj.Pickupdate,
             "time": obj.Time,
             "Contact": obj.ContactNumber,
-            "price": obj.israndom ? obj.price * 1.80 : obj.price * 2.00,
+            "price": obj.israndom ? obj.price * 2.00 : obj.price * 2.50 + (fromairport ? 10 : 5),
             "status": "Pending",
         }
         try {
@@ -139,7 +193,7 @@ export const Ride = () => {
                 data: obj.Pickupdate,
                 time: obj.Time,
                 Contact: obj.ContactNumber,
-                price: obj.israndom ? obj.price * 1.80 : obj.price * 2.00,
+                price: obj.israndom ? obj.price * 2.00 : obj.price * 2.50 + (fromairport ? 10 : 5),
                 status: "Pending",
                 status1: obj.israndom ? false : true,
                 audi: obj.isaudi,
@@ -179,7 +233,7 @@ export const Ride = () => {
             LastName: obj.LastName,
             Email: obj.Email,
             ContactNumber: obj.ContactNumber,
-            price: obj.israndom ? obj.price * 1.80 : obj.price * 2.00
+            price: obj.israndom ? obj.price * 2.00 : obj.price * 2.50 + (fromairport ? 10 : 5)
         }
         emailjs.send('service_3qvwwz1', 'template_6ud8jbi', emailParams, 'NOwvdl2jH-V4fF3VM')
             .then((result) => {
@@ -464,7 +518,7 @@ export const Ride = () => {
                         {
                             toairport && (
                                 <select onChange={handlechange}>
-                                    <option id="" placeholder='Current Location' required>Current Location</option>
+                                    <option id="" placeholder='Select Location' required disabled={true} selected={true}>Select Location</option>
                                     {
                                         data.map((arr) => (
                                             <option key={arr.key} id="">{arr.name}</option>
@@ -489,7 +543,7 @@ export const Ride = () => {
                         }
                         {
                             fromairport && (<select onChange={handlechange}>
-                                <option id="" placeholder='Current Location' required>Current Location</option>
+                                <option id="" placeholder='Select Location' required disabled={true} selected={true}>Select Location</option>
                                 {
                                     data.map((arr) => (
                                         <option key={arr.key} id="">{arr.name}</option>
@@ -503,6 +557,7 @@ export const Ride = () => {
                         <div className='luggage'>
                             <div className='left-luggage'>
                                 <div className='main-p'>
+
                                     <div className='persvg1'>
                                         <p className='label-tag m-t'>Number of Passengers</p>
                                         <div className='m-table'>
@@ -529,7 +584,7 @@ export const Ride = () => {
                         </div>
                     </form>
                     <div className="right">
-                        <img src={map_pic} alt="" />
+                        <MapContainer options={options} apiKey={apiKey} />
                         {/* <div className='ifreame-width'><iframe width="100%" height="570" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=manchester+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/population/">Population calculator map</a></iframe></div> */}
                     </div>
                 </div>
@@ -538,8 +593,8 @@ export const Ride = () => {
                 </div>
                 {
                     svehicle && <>
-                        <div className='bottom-s'>
-                            <div className="random">
+                        <div style={{ flexWrap: "wrap" }} className='bottom-s'>
+                            <div style={{ display: "flex", justifyContent: "center", marginBottom: "10px" }} className="random">
                                 <input
                                     className="radio"
                                     type="radio"
@@ -559,11 +614,11 @@ export const Ride = () => {
                                             setobj({ ...obj, israndom: true, isselective: false, isaudi: false, isMercedes: false })
                                         }}
                                     >
-                                        Random Vehicle Charges £1.80/mile
+                                        Random Vehicle Charges £2.0/mile
                                     </span>
                                 </label>
                             </div>
-                            <div className="selective">
+                            <div style={{ display: "flex", justifyContent: "center", marginBottom: "10px" }} className="selective">
                                 <input
                                     className="radio"
                                     type="radio"
@@ -583,7 +638,7 @@ export const Ride = () => {
                                             setobj({ ...obj, israndom: false, isselective: true, isaudi: false, isMercedes: false })
                                         }}
                                     >
-                                        Select Vehicle Charges £2.0/mile
+                                        Select Vehicle Charges £2.5/mile
                                     </span>
                                 </label>
                             </div>
@@ -618,7 +673,9 @@ export const Ride = () => {
                                 </div>
                             )
                         }
-                        <div className='m-auto'>
+                        <div className='m-auto' style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+                            <h3 style={{margin: 0, padding: 0}} className='cen'><span style={{color: "#000"}}>Total:</span> <span>£</span>{obj.israndom ? obj.price * 2.00 : obj.price * 2.50 + (fromairport ? 10 : 5)}</h3>
+                            <img style={{margin: "0 0 20px 0", padding: 0}} src={underLinePic} alt="" />
                             <button onClick={handlechoice} type='submit' className='s-vehecle'>Confirm Choice</button>
                         </div>
                     </>
@@ -672,7 +729,7 @@ export const Ride = () => {
                                     </>)
                                 }
                                 <div className='m-auto'>
-                                    <button disabled={register?disabled1:disabled} type='submit' className='s-vehecle b-o'>{register ? 'Register' : 'Login'}</button>
+                                    <button disabled={register ? disabled1 : disabled} type='submit' className='s-vehecle b-o'>{register ? 'Register' : 'Login'}</button>
                                 </div>
                             </form>
                         </>
@@ -684,9 +741,15 @@ export const Ride = () => {
                 </div>
                 {
                     submit1 && <>
-                        <h3 className='cen'><span>£</span>{obj.israndom ? obj.price * 1.80 : obj.price * 2.00}</h3>
+                        <h3 className='cen'><span>£</span>{obj.israndom ? obj.price * 2.00 : obj.price * 2.50 + (fromairport ? 10 : 5)}</h3>
+                        <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
+                            <input style={{marginRight: "10px", width: "20px", padding: "4px"}} onChange={()=>{setCheckboxVerified(!checkboxVerified)}} type="checkbox" />
+                            {
+                                window.outerWidth > 700 ? <a style={{textDecoration: "none"}} href='/privacy-policy' target="_blank">I agree to the rule and regulations by KZ CARS Cars Service.</a> : <p style={{textDecoration: "none"}} >I agree to the rule and regulations by KZ CARS Cars Service.</p>
+                            }
+                        </div>
                         <div className='m-auto'>
-                            <button onClick={handlesubmited} type='submit' className='s-vehecle b-o'>Book</button>
+                            <button disabled={!checkboxVerified} onClick={handlesubmited} type='submit' className='s-vehecle b-o'>Book</button>
                         </div>
                     </>
                 }

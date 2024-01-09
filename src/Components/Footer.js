@@ -194,7 +194,7 @@ const Footer = () => {
                                             {/* </p> */}
                                             <p><span style={{ color: '#ffffff' }}><a style={{ color: '#ffffff' }}
                                                 href="tel:+447446158821"><strong>+447446158821</strong></a></span></p>
-                                            <p>kz.cars.mcr@gmail.com</p>
+                                            <p>info@kz-cars.com</p>
                                         </div>
                                     </div>
                                 </div>
