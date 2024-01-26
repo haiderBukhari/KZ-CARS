@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, signOut } from 'firebase/auth'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { auth } from './Config/Firebase';
 import emailjs from '@emailjs/browser';
 import { toast } from 'react-toastify';
@@ -9,18 +9,13 @@ import svg from './svg.png'
 import luggages from './160345.png'
 import audi from './audibck-removebg-preview.png'
 import merceedeez from './merc-removebg-preview.png'
-import map_pic from './map-pic.png'
 import { useNavigate } from 'react-router-dom';
-import { add, remove } from '../Store/loginSlice';
+import { add } from '../Store/loginSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { database } from './Config/Firebase'
-import { getDocs, collection, addDoc } from 'firebase/firestore'
+import { collection, addDoc } from 'firebase/firestore'
 import { GoogleMap, DirectionsService, DirectionsRenderer } from '@react-google-maps/api';
 import underLinePic from "../Assets/underline.png"
-// import { createProxyMiddleware } from 'http-proxy-middleware';
-
-
-let googleApiLoaded = false;
 
 const MapContainer = ({ options, apiKey }) => {
     const [directions, setDirections] = useState(null);
@@ -75,7 +70,6 @@ export const Ride = () => {
     let [p2p, setp2p] = useState(false)
     let [fromairport, setfromairport] = useState(false)
     let [toairport, settoairport] = useState(true);
-    const [directions, setDirections] = useState(null);
     const [options, setOption] = useState({});
     const [checkboxVerified, setCheckboxVerified] = useState(false);
     const apiKey = 'AIzaSyCgE_NjJK_ZRHTcZUCYSG8dYAAwS_idFPU';
@@ -111,9 +105,6 @@ export const Ride = () => {
             progress: undefined,
             theme: "colored",
         })
-    }
-    function error(err) {
-        error(err.message)
     }
     const handlesubmitdata = async (e) => {
         setdisabled1(true)
@@ -173,17 +164,6 @@ export const Ride = () => {
     const datalist = collection(database, "kz-cars-orders")
     const handlesubmited = async (e) => {
         e.preventDefault()
-        const data = {
-            "name": obj.FullName,
-            "fromlocation": obj.Airport,
-            "tolocation": obj.Location,
-            "email": obj.Email,
-            "data": obj.Pickupdate,
-            "time": obj.Time,
-            "Contact": obj.ContactNumber,
-            "price": obj.israndom ? obj.price * 2.00 : obj.price * 2.50 + (fromairport ? 10 : 5),
-            "status": "Pending",
-        }
         try {
             await addDoc(datalist, {
                 name: obj.FullName,
@@ -193,7 +173,7 @@ export const Ride = () => {
                 data: obj.Pickupdate,
                 time: obj.Time,
                 Contact: obj.ContactNumber,
-                price: obj.israndom ? obj.price * 2.00 : obj.price * 2.50 + (fromairport ? 10 : 5),
+                price: obj.price <=10 ? 30 : obj.israndom ? obj.price * 2.00 : obj.price * 2.50 + (fromairport ? 10 : 5),
                 status: "Pending",
                 status1: obj.israndom ? false : true,
                 audi: obj.isaudi,
@@ -233,7 +213,7 @@ export const Ride = () => {
             LastName: obj.LastName,
             Email: obj.Email,
             ContactNumber: obj.ContactNumber,
-            price: obj.israndom ? obj.price * 2.00 : obj.price * 2.50 + (fromairport ? 10 : 5)
+            price: obj.price <=10 ? 30 : obj.israndom ? obj.price * 2.00 : obj.price * 2.50 + (fromairport ? 10 : 5)
         }
         emailjs.send('service_3qvwwz1', 'template_6ud8jbi', emailParams, 'NOwvdl2jH-V4fF3VM')
             .then((result) => {
@@ -302,13 +282,6 @@ export const Ride = () => {
             // error(err.message)
         }
     }
-    function deg2rad(deg) {
-        return deg * (Math.PI / 180);
-    }
-
-    function rad2deg(rad) {
-        return rad * (180 / Math.PI);
-    }
 
     useEffect(() => {
         const autocomplete = new window.google.maps.places.Autocomplete(
@@ -344,19 +317,18 @@ export const Ride = () => {
         });
     }, [p2p, toairport, fromairport]);
     useEffect(() => {
-        if (lat != null && long != null && distlat != null && distlong != null && lat != undefined && long != undefined && distlat != undefined && distlong != undefined) {
+        if (lat !== null && long !== null && distlat !== null && distlong !== null && lat !== undefined && long !== undefined && distlat !== undefined && distlong !== undefined) {
             var gps1 = new window.google.maps.LatLng(lat, long);
             var gps2 = new window.google.maps.LatLng(distlat, distlong);
             if (window.google.maps.geometry) {
                 var total_distance = window.google.maps.geometry.spherical.computeDistanceBetween(gps1, gps2);
                 var total_distance_mile = total_distance / 1609.34;
-                // let totalprice = obj.israndom?total_distance_mile*1.80:total_distance_mile*2.00;
                 setobj({ ...obj, price: total_distance_mile })
             } else {
                 console.error('Google Maps Geometry library is not loaded.');
             }
         }
-    }, [lat, long, distlat, distlong])
+    }, [lat, long, distlat, distlong]) //eslint-disable-line
     useEffect(() => {
         console.log("ajaakajja");
     }, [])
@@ -427,7 +399,6 @@ export const Ride = () => {
     }
     let handleridesubmit = (e) => {
         e.preventDefault();
-        console.log(obj);
         setsvehicle(true)
         handlevsubmit()
     }
@@ -585,7 +556,6 @@ export const Ride = () => {
                     </form>
                     <div className="right">
                         <MapContainer options={options} apiKey={apiKey} />
-                        {/* <div className='ifreame-width'><iframe width="100%" height="570" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=manchester+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.maps.ie/population/">Population calculator map</a></iframe></div> */}
                     </div>
                 </div>
                 <div className="info-ride">
@@ -674,7 +644,7 @@ export const Ride = () => {
                             )
                         }
                         <div className='m-auto' style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
-                            <h3 style={{margin: 0, padding: 0}} className='cen'><span style={{color: "#000"}}>Total:</span> <span>£</span>{obj.israndom ? obj.price * 2.00 : obj.price * 2.50 + (fromairport ? 10 : 5)}</h3>
+                            <h3 style={{margin: 0, padding: 0}} className='cen'><span style={{color: "#000"}}>Total:</span> <span>£</span>{obj.price <=10 ? 30 : obj.israndom ? obj.price * 2.00 : obj.price * 2.50 + (fromairport ? 10 : 5)}</h3>
                             <img style={{margin: "0 0 20px 0", padding: 0}} src={underLinePic} alt="" />
                             <button onClick={handlechoice} type='submit' className='s-vehecle'>Confirm Choice</button>
                         </div>
@@ -741,7 +711,7 @@ export const Ride = () => {
                 </div>
                 {
                     submit1 && <>
-                        <h3 className='cen'><span>£</span>{obj.israndom ? obj.price * 2.00 : obj.price * 2.50 + (fromairport ? 10 : 5)}</h3>
+                        <h3 className='cen'><span>£</span>{obj.price <=10 ? 30 : obj.israndom ? obj.price * 2.00 : obj.price * 2.50 + (fromairport ? 10 : 5)}</h3>
                         <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
                             <input style={{marginRight: "10px", width: "20px", padding: "4px"}} onChange={()=>{setCheckboxVerified(!checkboxVerified)}} type="checkbox" />
                             {
